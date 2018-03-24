@@ -1,0 +1,159 @@
+{
+    "name": "vscode-dls",
+    "displayName": "VSCode DLS",
+    "description": "Support for Dlang using DLS",
+    "icon": "res/icon.png",
+    "version": "1.0.0",
+    "preview": true,
+    "publisher": "LaurentTreguier",
+    "repository": {
+        "url": "https://github.com/LaurentTreguier",
+        "type": "git"
+    },
+    "author": {
+        "name": "Laurent Tréguier",
+        "url": "https://github.com/LaurentTreguier"
+    },
+    "bugs": {
+        "url": "https://github.com/LaurentTreguier/vscode-dls/issues"
+    },
+    "engines": {
+        "vscode": "^1.21.0"
+    },
+    "categories": [
+        "Languages",
+        "Formatters",
+        "Other"
+    ],
+    "keywords": [
+        "multi-root ready",
+        "dlang",
+        "d",
+        "dls"
+    ],
+    "activationEvents": [
+        "onLanguage:d",
+        "workspaceContains:dub.json",
+        "workspaceContains:dub.sdl"
+    ],
+    "main": "./out/extension",
+    "contributes": {
+        "languages": [
+            {
+                "id": "d",
+                "aliases": [
+                    "D"
+                ],
+                "extensions": [
+                    "d"
+                ]
+            }
+        ],
+        "grammars": [
+            {
+                "language": "d",
+                "scopeName": "source.d",
+                "path": "./syntaxes/d.tmLanguage.json"
+            }
+        ],
+        "configuration": [
+            {
+                "title": "D",
+                "properties": {
+                    "d.dubPath": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "default": null
+                    },
+                    "d.dlsPath": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "default": null
+                    },
+                    "d.dls.general.importPaths": {
+                        "type": "array",
+                        "default": []
+                    },
+                    "d.dls.formatter.endOfLine": {
+                        "enum": [
+                            "lf",
+                            "cr",
+                            "crlf"
+                        ],
+                        "default": "lf"
+                    },
+                    "d.dls.formatter.maxLineLength": {
+                        "type": "number",
+                        "default": 120
+                    },
+                    "d.dls.formatter.dfmtBraceStyle": {
+                        "enum": [
+                            "allman",
+                            "otbs",
+                            "stroustrup"
+                        ],
+                        "default": "allman"
+                    },
+                    "d.dls.formatter.dfmtSoftMaxLineLength": {
+                        "type": "number",
+                        "default": 80
+                    },
+                    "d.dls.formatter.dfmtAlignSwitchStatements": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "d.dls.formatter.dfmtOutdentAttributes": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "d.dls.formatter.dfmtSplitOperatorAtLineEnd": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "d.dls.formatter.dfmtSpaceAfterCast": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "d.dls.formatter.dfmtSpaceAfterKeywords": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "d.dls.formatter.dfmtSpaceBeforeFunctionParameters": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "d.dls.formatter.dfmtSelectiveImportSpace": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "d.dls.formatter.dfmtCompactLabeledStatements": {
+                        "type": "boolean",
+                        "default": true
+                    }
+                }
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "npm run compile && node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "@types/mocha": "^2.2.48",
+        "@types/node": "^9.4.7",
+        "tslint": "^5.9.1",
+        "typescript": "^2.7.2",
+        "vsce": "^1.37.6",
+        "vscode": "^1.1.14"
+    },
+    "dependencies": {
+        "vscode-languageclient": "^3.5.0"
+    }
+}
