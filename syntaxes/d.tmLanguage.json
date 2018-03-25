@@ -23,10 +23,31 @@
             ]
         },
         {
-            "begin": "\\b(?:(?:static|public)\\s+)?import\\b",
+            "begin": "\\b(import)\\s*\\(",
+            "end": "\\)",
+            "beginCaptures": {
+                "1": {
+                    "name": "keyword.control.import.d"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "$self"
+                }
+            ]
+        },
+        {
+            "begin": "\\b(?:(static|public)\\s+)?(import)\\b",
             "end": ";",
             "beginCaptures": {
-                "0": {
+                "1": {
+                    "patterns": [
+                        {
+                            "include": "$self"
+                        }
+                    ]
+                },
+                "2": {
                     "name": "keyword.control.import.d"
                 }
             },
