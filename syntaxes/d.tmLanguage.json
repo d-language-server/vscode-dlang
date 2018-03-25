@@ -1,5 +1,6 @@
 {
     "scopeName": "source.d",
+    "name": "D",
     "fileTypes": [
         "d",
         "di"
