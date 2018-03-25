@@ -16,9 +16,9 @@ export function activate(context: vsc.ExtensionContext) {
                 return launchServer(context, path);
             }
         } catch (err) {
-        } finally {
-            context.globalState.update('dlsPath', '');
         }
+
+        context.globalState.update('dlsPath', '');
     }
 
     path = '';
@@ -29,7 +29,7 @@ export function activate(context: vsc.ExtensionContext) {
             .on('end', resolve)
         ))
         .then(() => new Promise(resolve => {
-            vsc.window.showInformationMessage('Building DLS...');
+            vsc.window.showInformationMessage('Building DLS... (this might take a few minutes)');
             cp.spawn('dub', ['build', '--build=release']
                 .concat(process.platform === 'win32' ? ['--arch=x86_mscoff'] : []), { cwd: path })
                 .on('exit', resolve);
