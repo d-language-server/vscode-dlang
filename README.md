@@ -2,8 +2,9 @@
 
 ## Features
 
-Features are provided by DLS's dependencies.
+Features are provided by DLS's dependencies: [DCD](http://dcd.dub.pm), [DFMT](http://dfmt.dub.pm) (and [D-Scanner](http://dscanner.dub.pm) in the future).
 Look [here](https://github.com/LaurentTreguier/dls) for an up-to-date list of features currently supported.
+For now few features are implemented, but the server will propose updates as new features come.
 
 ## Requirements
 
