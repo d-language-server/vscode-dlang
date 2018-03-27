@@ -23,14 +23,15 @@ export function activate(context: vsc.ExtensionContext) {
 
     path = '';
 
-    let promise = new Promise(resolve => cp.spawn('dub', ['fetch', 'dls']).on('exit', resolve))
-        .then(() => new Promise(resolve => cp.spawn('dub', ['run', '--quiet', 'dls:find'])
+    let dub = vsc.workspace.getConfiguration('d').get<string>('dubPath') || 'dub';
+    let promise = new Promise(resolve => cp.spawn(dub, ['fetch', 'dls']).on('exit', resolve))
+        .then(() => new Promise(resolve => cp.spawn(dub, ['run', '--quiet', 'dls:find'])
             .stdout.on('data', data => path += data.toString())
             .on('end', resolve)
         ))
         .then(() => new Promise(resolve => {
             vsc.window.showInformationMessage('Building DLS... (this might take a few minutes)');
-            cp.spawn('dub', ['build', '--build=release']
+            cp.spawn(dub, ['build', '--build=release']
                 .concat(process.platform === 'win32' ? ['--arch=x86_mscoff'] : []), { cwd: path })
                 .on('exit', resolve);
         }));
