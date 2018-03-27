@@ -73,11 +73,11 @@
                         ],
                         "default": null
                     },
-                    "d.dls.general.importPaths": {
+                    "d.dls.symbol.importPaths": {
                         "type": "array",
                         "default": []
                     },
-                    "d.dls.formatter.endOfLine": {
+                    "d.dls.format.endOfLine": {
                         "enum": [
                             "lf",
                             "cr",
@@ -85,11 +85,11 @@
                         ],
                         "default": "lf"
                     },
-                    "d.dls.formatter.maxLineLength": {
+                    "d.dls.format.maxLineLength": {
                         "type": "number",
                         "default": 120
                     },
-                    "d.dls.formatter.dfmtBraceStyle": {
+                    "d.dls.format.dfmtBraceStyle": {
                         "enum": [
                             "allman",
                             "otbs",
@@ -97,39 +97,39 @@
                         ],
                         "default": "allman"
                     },
-                    "d.dls.formatter.dfmtSoftMaxLineLength": {
+                    "d.dls.format.dfmtSoftMaxLineLength": {
                         "type": "number",
                         "default": 80
                     },
-                    "d.dls.formatter.dfmtAlignSwitchStatements": {
+                    "d.dls.format.dfmtAlignSwitchStatements": {
                         "type": "boolean",
                         "default": true
                     },
-                    "d.dls.formatter.dfmtOutdentAttributes": {
+                    "d.dls.format.dfmtOutdentAttributes": {
                         "type": "boolean",
                         "default": true
                     },
-                    "d.dls.formatter.dfmtSplitOperatorAtLineEnd": {
+                    "d.dls.format.dfmtSplitOperatorAtLineEnd": {
                         "type": "boolean",
                         "default": false
                     },
-                    "d.dls.formatter.dfmtSpaceAfterCast": {
+                    "d.dls.format.dfmtSpaceAfterCast": {
                         "type": "boolean",
                         "default": true
                     },
-                    "d.dls.formatter.dfmtSpaceAfterKeywords": {
+                    "d.dls.format.dfmtSpaceAfterKeywords": {
                         "type": "boolean",
                         "default": true
                     },
-                    "d.dls.formatter.dfmtSpaceBeforeFunctionParameters": {
+                    "d.dls.format.dfmtSpaceBeforeFunctionParameters": {
                         "type": "boolean",
                         "default": false
                     },
-                    "d.dls.formatter.dfmtSelectiveImportSpace": {
+                    "d.dls.format.dfmtSelectiveImportSpace": {
                         "type": "boolean",
                         "default": true
                     },
-                    "d.dls.formatter.dfmtCompactLabeledStatements": {
+                    "d.dls.format.dfmtCompactLabeledStatements": {
                         "type": "boolean",
                         "default": true
                     }

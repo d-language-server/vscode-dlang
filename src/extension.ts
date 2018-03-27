@@ -54,6 +54,6 @@ function launchServer(context: vsc.ExtensionContext, dlsPath: string) {
         synchronize: { configurationSection: 'd.dls' }
     };
     const client = new lc.LanguageClient('vscode-dls', 'D Language', serverOptions, clientOptions);
-    client.onTelemetry(path => context.globalState.update('dlsPath', path));
+    client.onNotification('dls/updatedPath', path => context.globalState.update('dlsPath', path));
     context.subscriptions.push(client.start());
 }
