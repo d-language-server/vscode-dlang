@@ -225,7 +225,7 @@
         },
         {
             "contentName": "meta.parens.d",
-            "begin": "\\b(__traits)\\s*((\\()\\s*(?:(isAbstractClass|isArithmetic|isAssociativeArray|isFinalClass|isPOD|isNested|isFloating|isIntegral|isScalar|isStaticArray|isUnsigned|isVirtualFunction|isVirtualMethod|isAbstractFunction|isFinalFunction|isStaticFunction|isOverrideFunction|isTemplate|isRef|isOut|isLazy|hasMember|identifier|getAliasThis|getAttributes|getFunctionAttributes|getFunctionVariadicStyle|getLinkage|getMember|getOverloads|getParameterStorageClasses|getPointerBitmap|getProtection|getVirtualFunctions|getVirtualMethods|getUnitTests|parent|classInstanceSize|getVirtualIndex|allMembers|derivedMembers|isSame|isDeprecated|compiles)|(\\w+)))\\b",
+            "begin": "\\b(__traits)\\s*((\\()\\s*(?:(isAbstractClass|isArithmetic|isAssociativeArray|isFinalClass|isPOD|isNested|isFuture|isDeprecated|isFloating|isIntegral|isScalar|isStaticArray|isUnsigned|isDisabled|isVirtualFunction|isVirtualMethod|isAbstractFunction|isFinalFunction|isStaticFunction|isOverrideFunction|isTemplate|isRef|isOut|isLazy|isReturnOnStack|hasMember|identifier|getAliasThis|getAttributes|getFunctionAttributes|getFunctionVariadicStyle|getLinkage|getMember|getOverloads|getParameterStorageClasses|getPointerBitmap|getProtection|getVirtualFunctions|getVirtualMethods|getUnitTests|parent|classInstanceSize|getVirtualIndex|allMembers|derivedMembers|isSame|compiles)|(\\w+)))\\b",
             "end": "\\)",
             "beginCaptures": {
                 "1": {
