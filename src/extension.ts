@@ -57,7 +57,7 @@ function launchServer(context: vsc.ExtensionContext, dlsPath: string) {
     client.onReady().then(() => {
         let updatePath = (path: string) => context.globalState.update('dlsPath', path);
         client.onTelemetry(updatePath);
-        client.onNotification('dls/updatedPath', updatePath);
+        client.onNotification('dls/didUpdatePath', updatePath);
     });
     context.subscriptions.push(client.start());
 }
