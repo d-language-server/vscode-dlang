@@ -26,6 +26,7 @@
         "Other"
     ],
     "keywords": [
+        "multi-root ready",
         "dlang",
         "d",
         "dls"
@@ -45,7 +46,9 @@
                 ],
                 "extensions": [
                     "d"
-                ]
+                ],
+                "firstLine": "^#!.*rdmd",
+                "configuration": "./syntaxes/d.configuration.json"
             }
         ],
         "grammars": [
