@@ -11,6 +11,10 @@ export function activate(context: vsc.ExtensionContext) {
         || context.globalState.get('dlsPath') || '';
 
     if (path.length) {
+        if (process.platform === 'win32' && !path.endsWith('.exe')) {
+            path += '.exe';
+        }
+
         try {
             if (fs.statSync(path).isFile()) {
                 return launchServer(context, path);
