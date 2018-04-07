@@ -80,6 +80,10 @@
                         "type": "array",
                         "default": []
                     },
+                    "d.dls.analysis.configFile": {
+                        "type": "string",
+                        "default": "dscanner.ini"
+                    },
                     "d.dls.format.endOfLine": {
                         "enum": [
                             "lf",

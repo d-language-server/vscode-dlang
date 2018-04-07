@@ -1,6 +1,12 @@
 # Change Log
 
-#### 1.0.4
+### 1.2.0
+- Added D-Scanner config file configuration
+
+#### 1.1.1
+- Fixed update problem on Windows
+
+### 1.1.0
 - Fixed grammar `__traits`
 - Updated to DLS changes
 
