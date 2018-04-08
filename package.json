@@ -63,11 +63,8 @@
                 "title": "D",
                 "properties": {
                     "d.dubPath": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "default": null
+                        "type": "string",
+                        "default": "dub"
                     },
                     "d.dlsPath": {
                         "type": [
@@ -85,6 +82,7 @@
                         "default": "dscanner.ini"
                     },
                     "d.dls.format.endOfLine": {
+                        "type": "string",
                         "enum": [
                             "lf",
                             "cr",
@@ -96,7 +94,12 @@
                         "type": "number",
                         "default": 120
                     },
+                    "d.dls.format.dfmtAlignSwitchStatements": {
+                        "type": "boolean",
+                        "default": true
+                    },
                     "d.dls.format.dfmtBraceStyle": {
+                        "type": "string",
                         "enum": [
                             "allman",
                             "otbs",
@@ -104,21 +107,13 @@
                         ],
                         "default": "allman"
                     },
-                    "d.dls.format.dfmtSoftMaxLineLength": {
-                        "type": "number",
-                        "default": 80
-                    },
-                    "d.dls.format.dfmtAlignSwitchStatements": {
-                        "type": "boolean",
-                        "default": true
-                    },
                     "d.dls.format.dfmtOutdentAttributes": {
                         "type": "boolean",
                         "default": true
                     },
-                    "d.dls.format.dfmtSplitOperatorAtLineEnd": {
-                        "type": "boolean",
-                        "default": false
+                    "d.dls.format.dfmtSoftMaxLineLength": {
+                        "type": "number",
+                        "default": 80
                     },
                     "d.dls.format.dfmtSpaceAfterCast": {
                         "type": "boolean",
@@ -132,6 +127,10 @@
                         "type": "boolean",
                         "default": false
                     },
+                    "d.dls.format.dfmtSplitOperatorAtLineEnd": {
+                        "type": "boolean",
+                        "default": false
+                    },
                     "d.dls.format.dfmtSelectiveImportSpace": {
                         "type": "boolean",
                         "default": true
@@ -139,6 +138,20 @@
                     "d.dls.format.dfmtCompactLabeledStatements": {
                         "type": "boolean",
                         "default": true
+                    },
+                    "d.dls.format.dfmtTemplateConstraintStyle": {
+                        "type": "string",
+                        "enum": [
+                            "conditionalNewlineIndent",
+                            "conditionalNewline",
+                            "alwaysNewline",
+                            "alwaysNewlineIndent"
+                        ],
+                        "default": "conditionalNewlineIndent"
+                    },
+                    "d.dls.format.dfmtSingleTemplateConstraintIndent": {
+                        "type": "boolean",
+                        "default": false
                     }
                 }
             }
