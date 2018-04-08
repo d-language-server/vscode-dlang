@@ -1,5 +1,8 @@
 # Change Log
 
+### 1.3.0
+- Added missing DFMT configuration options
+
 ### 1.2.0
 - Added D-Scanner config file configuration
 
