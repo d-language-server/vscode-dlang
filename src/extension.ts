@@ -28,24 +28,23 @@ export function activate(context: vsc.ExtensionContext) {
     path = '';
 
     let dub = vsc.workspace.getConfiguration('d').get<string>('dubPath') || 'dub';
-    let promise = new Promise(resolve => cp.spawn(dub, ['fetch', 'dls']).on('exit', resolve))
-        .then(() => new Promise(resolve => cp.spawn(dub, ['run', '--quiet', 'dls:find'])
-            .stdout.on('data', data => path += data.toString())
-            .on('end', resolve)
-        ))
-        .then(() => new Promise(resolve => {
-            vsc.window.showInformationMessage('Building DLS... (this might take a few minutes)');
-            cp.spawn(dub, ['build', '--build=release']
+    let options: vsc.ProgressOptions = {
+        location: vsc.ProgressLocation.Notification,
+        title: 'Building DLS... (this might take a few minutes)',
+        cancellable: false
+    };
+
+    return vsc.window.withProgress(options, (progress) =>
+        new Promise(resolve => cp.spawn(dub, ['fetch', 'dls']).on('exit', resolve))
+            .then(() => new Promise(resolve => cp.spawn(dub, ['run', '--quiet', 'dls:find'])
+                .stdout.on('data', data => path += data.toString())
+                .on('end', resolve)
+            ))
+            .then(() => new Promise(resolve => cp.spawn(dub, ['build', '--build=release']
                 .concat(process.platform === 'win32' ? ['--arch=x86_mscoff'] : []), { cwd: path })
-                .on('exit', resolve);
-        }));
-
-    vsc.window.setStatusBarMessage('Building DLS...', promise);
-
-    return promise.then(() => {
-        vsc.window.showInformationMessage('DLS built ! Launching server...');
-        launchServer(context, p.join(path, 'dls'));
-    });
+                .on('exit', resolve)
+            ))
+            .then(() => launchServer(context, p.join(path, 'dls'))));
 }
 
 export function deactivate() {
