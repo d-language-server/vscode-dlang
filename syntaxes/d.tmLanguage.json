@@ -429,7 +429,7 @@
         },
         {
             "name": "keyword.control.d",
-            "match": "\\b(asm|assert|body|cast|debug|invariant|return|synchronized|with)\\b"
+            "match": "\\b(asm|body|debug|invariant|return|synchronized|unittest|with)\\b"
         },
         {
             "name": "keyword.operator.arithmetic.d",
@@ -468,12 +468,8 @@
             "match": "\\."
         },
         {
-            "name": "keyword.operator.word.d",
-            "match": "\\b(delete|new)\\b"
-        },
-        {
             "name": "keyword.other.d",
-            "match": "\\b(deprecated|is|macro|mixin|typeid|typeof|unittest)\\b"
+            "match": "\\b(assert|cast|delete|deprecated|is|macro|mixin|new|typeid|typeof)\\b"
         },
         {
             "name": "storage.modifier.attribute.d",
@@ -544,14 +540,6 @@
             "match": "\\b(super|this|version|__parameters)\\b"
         },
         {
-            "match": "(?<=\\.)\\s*(alignof|assumeSafeAppend|capacity|classinfo|clear|dig|dup|epsilon|hashOf|idup|im|infinity|init|keys|mangleof|mant_dig|max|max(?:_10)?_exp|min(?:_10)?_exp|min_normal|nan|ptr|re|rehash|reserve|sizeof|stringof|values)\\b",
-            "captures": {
-                "1": {
-                    "name": "support.constant.property.d"
-                }
-            }
-        },
-        {
             "name": "support.class.d",
             "match": "\\b(Error|Exception|Interface|Object|OffsetTypeInfo|RTInfo|Throwable|TypeInfo|TypeInfo_Class)\\b"
         },
@@ -585,6 +573,17 @@
                             "include": "#functions-support"
                         }
                     ]
+                }
+            }
+        },
+        {
+            "match": "(?<=\\.)\\s*(?:(alignof|assumeSafeAppend|capacity|classinfo|clear|dig|dup|epsilon|hashOf|idup|im|infinity|init|keys|mangleof|mant_dig|max|max(?:_10)?_exp|min(?:_10)?_exp|min_normal|nan|ptr|re|rehash|reserve|sizeof|stringof|values)|(\\w+))\\b",
+            "captures": {
+                "1": {
+                    "name": "support.constant.property.d"
+                },
+                "2": {
+                    "name": "variable.other.member.d"
                 }
             }
         },
