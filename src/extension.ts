@@ -1,23 +1,22 @@
 'use strict';
 
 import * as fs from 'fs';
-import * as p from 'path';
 import * as cp from 'child_process';
 import * as vsc from 'vscode';
 import * as lc from 'vscode-languageclient';
 
 export function activate(context: vsc.ExtensionContext) {
-    let path = vsc.workspace.getConfiguration('d').get<string>('dlsPath')
+    let dlsPath = vsc.workspace.getConfiguration('d').get<string>('dlsPath')
         || context.globalState.get('dlsPath') || '';
 
-    if (path.length) {
-        if (process.platform === 'win32' && !path.endsWith('.exe')) {
-            path += '.exe';
+    if (dlsPath.length) {
+        if (process.platform === 'win32' && !dlsPath.endsWith('.exe')) {
+            dlsPath += '.exe';
         }
 
         try {
-            if (fs.statSync(path).isFile()) {
-                return launchServer(context, path);
+            if (fs.statSync(dlsPath).isFile()) {
+                return launchServer(context, dlsPath);
             }
         } catch (err) {
         }
@@ -25,7 +24,7 @@ export function activate(context: vsc.ExtensionContext) {
         context.globalState.update('dlsPath', '');
     }
 
-    path = '';
+    dlsPath = '';
 
     let dub = vsc.workspace.getConfiguration('d').get<string>('dubPath') || 'dub';
     let options: vsc.ProgressOptions = {
@@ -36,15 +35,11 @@ export function activate(context: vsc.ExtensionContext) {
 
     return vsc.window.withProgress(options, (progress) =>
         new Promise(resolve => cp.spawn(dub, ['fetch', 'dls']).on('exit', resolve))
-            .then(() => new Promise(resolve => cp.spawn(dub, ['run', '--quiet', 'dls:find'])
-                .stdout.on('data', data => path += data.toString())
+            .then(() => new Promise(resolve => cp.spawn(dub, ['run', '--quiet', 'dls:bootstrap'])
+                .stdout.on('data', data => dlsPath += data.toString())
                 .on('end', resolve)
             ))
-            .then(() => new Promise(resolve => cp.spawn(dub, ['build', '--build=release']
-                .concat(process.platform === 'win32' ? ['--arch=x86_mscoff'] : []), { cwd: path })
-                .on('exit', resolve)
-            ))
-            .then(() => launchServer(context, p.join(path, 'dls'))));
+            .then(() => launchServer(context, dlsPath)));
 }
 
 export function deactivate() {
