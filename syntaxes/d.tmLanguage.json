@@ -174,12 +174,22 @@
             }
         },
         {
-            "match": "\\b(enum)\\s+(\\w+)?",
+            "match": "\\b(enum)\\s+(?:(\\w+)\\s+(\\w+)|(\\w+)?)",
             "captures": {
                 "1": {
                     "name": "storage.type.enum.d"
                 },
                 "2": {
+                    "patterns": [
+                        {
+                            "include": "$self"
+                        }
+                    ]
+                },
+                "3": {
+                    "name": "entity.name.enum.d"
+                },
+                "4": {
                     "name": "entity.name.enum.d"
                 }
             }
@@ -326,16 +336,32 @@
         },
         {
             "name": "string.quoted.double.delimited.d",
-            "begin": "q\"(?:\\[|\\(|<|\\{|(\\S))",
-            "end": "(?:\\]|\\)|>|\\}|\\1)\""
+            "begin": "q\"\\[",
+            "end": "\\]\""
+        },
+        {
+            "name": "string.quoted.double.delimited.d",
+            "begin": "q\"\\(",
+            "end": "\\)\""
+        },
+        {
+            "name": "string.quoted.double.delimited.d",
+            "begin": "q\"<",
+            "end": ">\""
+        },
+        {
+            "name": "string.quoted.double.delimited.d",
+            "begin": "q\"\\{",
+            "end": "\\}\""
         },
         {
             "name": "string.quoted.double.delimited.d",
             "begin": "q\"(\\w+)$",
-            "end": "^\\1\""
+            "end": "^\\s*\\1\""
         },
         {
             "name": "string.quoted.double.hex.d",
+            "contentName": "invalid.deprecated.hex.d",
             "begin": "x\"",
             "end": "\"(c|d|w)?",
             "patterns": [
@@ -366,7 +392,7 @@
             "end": "`(c|d|w)?"
         },
         {
-            "name": "string.unquoted.delimited.d",
+            "name": "string.unquoted.token.d",
             "begin": "q{",
             "end": "}",
             "patterns": [
@@ -469,7 +495,7 @@
         },
         {
             "name": "keyword.other.d",
-            "match": "\\b(assert|cast|delete|deprecated|is|macro|mixin|new|typeid|typeof)\\b"
+            "match": "\\b(assert|cast|deprecated|is|macro|mixin|new|typeid|typeof)\\b"
         },
         {
             "name": "storage.modifier.attribute.d",
@@ -513,7 +539,7 @@
         },
         {
             "name": "storage.modifier.d",
-            "match": "\\b(abstract|alias|align|auto|const|extern|final|immutable|in|inout|lazy|nothrow|out|override|pure|ref|scope|shared|static|typedef|volatile|__gshared)\\b"
+            "match": "\\b(abstract|alias|align|auto|const|extern|final|immutable|in|inout|lazy|nothrow|out|override|pure|ref|scope|shared|static|volatile|__gshared)\\b"
         },
         {
             "name": "storage.type.character.d",
@@ -534,6 +560,10 @@
         {
             "name": "storage.type.d",
             "match": "\\b(bool|class|delegate|enum|function|interface|struct|template|union|void|__vector)\\b"
+        },
+        {
+            "name": "invalid.deprecated.d",
+            "match": "\\b(delete|typedef)\\b"
         },
         {
             "name": "variable.language.d",
