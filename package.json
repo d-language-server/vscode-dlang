@@ -45,7 +45,8 @@
                     "D"
                 ],
                 "extensions": [
-                    ".d"
+                    ".d",
+                    ".di"
                 ],
                 "firstLine": "^#!.*rdmd",
                 "configuration": "./syntaxes/d.configuration.json"

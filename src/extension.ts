@@ -7,13 +7,9 @@ import * as lc from 'vscode-languageclient';
 
 export function activate(context: vsc.ExtensionContext) {
     let dlsPath = vsc.workspace.getConfiguration('d').get<string>('dlsPath')
-        || context.globalState.get('dlsPath') || '';
+        || context.globalState.get<string>('dlsPath') || '';
 
     if (dlsPath.length) {
-        if (process.platform === 'win32' && !dlsPath.endsWith('.exe')) {
-            dlsPath += '.exe';
-        }
-
         try {
             if (fs.statSync(dlsPath).isFile()) {
                 return launchServer(context, dlsPath);
