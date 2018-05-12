@@ -166,7 +166,7 @@
         "test": "npm run compile && node ./node_modules/vscode/bin/test"
     },
     "devDependencies": {
-        "@types/node": "^10.0.4",
+        "@types/node": "7.x.x",
         "tslint": "^5.10.0",
         "typescript": "^2.8.3",
         "vsce": "^1.40.0",
