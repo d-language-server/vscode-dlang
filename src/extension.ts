@@ -17,7 +17,7 @@ export function activate(context: vsc.ExtensionContext) {
         } catch (err) {
         }
 
-        context.globalState.update('dlsPath', '');
+        vsc.workspace.getConfiguration('d').update('dlsPath', '', vsc.ConfigurationTarget.Global);
     }
 
     dlsPath = '';
@@ -49,7 +49,7 @@ function launchServer(context: vsc.ExtensionContext, dlsPath: string) {
     };
     const client = new lc.LanguageClient('vscode-dls', 'D Language', serverOptions, clientOptions);
     client.onReady().then(() => {
-        let updatePath = (path: string) => context.globalState.update('dlsPath', path);
+        let updatePath = (path: string) => vsc.workspace.getConfiguration('d').update('dlsPath', path, vsc.ConfigurationTarget.Global);
         client.onTelemetry(updatePath);
         client.onNotification('dls/didUpdatePath', updatePath);
     });
