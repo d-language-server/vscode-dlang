@@ -439,7 +439,7 @@
         },
         {
             "name": "keyword.control.branch.d",
-            "match": "\\b(break|case|continue|default|goto|switch)\\b"
+            "match": "\\b(break|case|continue|default|goto|switch|version)\\b"
         },
         {
             "name": "keyword.control.conditional.d",
@@ -567,7 +567,7 @@
         },
         {
             "name": "variable.language.d",
-            "match": "\\b(super|this|version|__parameters)\\b"
+            "match": "\\b(super|this|__parameters)\\b"
         },
         {
             "name": "support.class.d",
