@@ -35,14 +35,10 @@ export function activate(context: vsc.ExtensionContext) {
         new Promise(resolve => cp.spawn(dub, ['fetch', 'dls']).on('exit', resolve))
             .then(() => new Promise(resolve => {
                 let bootstrap = cp.spawn(dub, ['run', '--quiet', 'dls:bootstrap', '--', '--progress']);
-                let total = 0;
                 bootstrap.stdout.on('data', data => dlsPath += data.toString())
                     .on('end', resolve);
                 rl.createInterface(bootstrap.stderr)
-                    .on('line', line => {
-                        progress.report({ increment: Number(line) - total });
-                        total = Number(line);
-                    });
+                    .on('line', (line: number) => progress.report({ increment: line }));
             }))
             .then(() => launchServer(context, dlsPath)));
 }
@@ -64,7 +60,9 @@ function launchServer(context: vsc.ExtensionContext, dlsPath: string) {
         documentSelector: [{ scheme: 'file', language: 'd' }],
         synchronize: { configurationSection: 'd.dls' },
         initializationOptions: {
-            upgradeProgress: true
+            lspExtensions: {
+                upgradeProgress: true
+            }
         }
     };
     const client = new lc.LanguageClient('vscode-dls', 'D Language', serverOptions, clientOptions);
@@ -78,12 +76,12 @@ function launchServer(context: vsc.ExtensionContext, dlsPath: string) {
         let total = 0;
         let resolve: lc.GenericNotificationHandler;
         let updatePath = (path: string) => vsc.workspace.getConfiguration('d').update('dlsPath', path, vsc.ConfigurationTarget.Global);
-        client.onNotification('$/dls.upgradeStart', () => vsc.window.withProgress(options, t => new Promise(r => { task = t; resolve = r })));
-        client.onNotification('$/dls.upgradeProgress', progress => {
-            task.report({ increment: progress - total, message: `Upgrading DLS [${progress}%]` });
-            total = progress;
+        client.onNotification('$/dls.upgradeDls.start', () => vsc.window.withProgress(options, t => new Promise(r => { task = t; resolve = r })));
+        client.onNotification('$/dls.upgradeDls.progress', (progress: number) => {
+            task.report({ increment: progress, message: `Upgrading DLS [${total}%]` });
+            total += progress;
         });
-        client.onNotification('$/dls.upgradeStop', () => resolve());
+        client.onNotification('$/dls.upgradeDls.stop', () => resolve());
         client.onNotification('dls/didUpdatePath', updatePath);
     });
     context.subscriptions.push(client.start());
