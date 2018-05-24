@@ -166,6 +166,7 @@
         "test": "npm run compile && node ./node_modules/vscode/bin/test"
     },
     "devDependencies": {
+        "@types/bytes": "^3.0.0",
         "@types/node": "7.x.x",
         "tslint": "^5.10.0",
         "typescript": "^2.8.3",
@@ -173,6 +174,7 @@
         "vscode": "^1.1.17"
     },
     "dependencies": {
+        "bytes": "^3.0.0",
         "vscode-languageclient": "^4.1.3"
     }
 }
