@@ -169,8 +169,8 @@
         "@types/bytes": "^3.0.0",
         "@types/node": "^7.x.x",
         "tslint": "^5.10.0",
-        "typescript": "^2.8.3",
-        "vsce": "^1.41.0",
+        "typescript": "^2.9.1",
+        "vsce": "^1.41.1",
         "vscode": "^1.1.18"
     },
     "dependencies": {
