@@ -17,7 +17,7 @@ export function activate(context: vsc.ExtensionContext) {
     if (dlsPath.length) {
         try {
             if (fs.statSync(dlsPath).isFile()) {
-                return launchServer(context, dlsPath);
+                return fixBrokenDls().then(() => launchServer(context, dlsPath));
             }
         } catch (err) {
         }
@@ -71,16 +71,36 @@ function getDlsPath() {
         isWindows ? 'dls.exe' : 'dls');
 }
 
+function fixBrokenDls() {
+    if (process.platform === 'win32') {
+        let destCurlPath = path.join(path.dirname(getDlsPath()), 'libcurl.dll');
+
+        try {
+            fs.statSync(destCurlPath);
+        } catch (err) {
+            for (let p of process.env['PATH'].split(';')) {
+                try {
+                    fs.accessSync(path.join(p, 'dmd.exe'));
+                    let dmdDir = path.dirname(p);
+                    let curlDir = path.join(dmdDir, process.arch === 'x64' ? 'bin64' : 'bin');
+
+                    return new Promise<void>(resolve => fs.createReadStream(path.join(curlDir, 'libcurl.dll'))
+                        .pipe(fs.createWriteStream(destCurlPath))
+                        .on('close', resolve));
+                } catch (err) { }
+            }
+        }
+    }
+
+    return Promise.resolve();
+}
+
 function launchServer(context: vsc.ExtensionContext, dlsPath: string) {
     const serverOptions: lc.ServerOptions = { command: dlsPath };
     const clientOptions: lc.LanguageClientOptions = {
         documentSelector: [{ scheme: 'file', language: 'd' }],
         synchronize: { configurationSection: 'd.dls' },
-        initializationOptions: {
-            lspExtensions: {
-                upgradeDls: true
-            }
-        }
+        initializationOptions: { lspExtensions: { upgradeDls: true } }
     };
     const client = new lc.LanguageClient('vscode-dls', 'D Language', serverOptions, clientOptions);
     client.onReady().then(() => {
