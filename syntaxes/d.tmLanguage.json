@@ -578,7 +578,7 @@
             "match": "\\b[A-Z]\\w*\\b"
         },
         {
-            "match": "\\b([a-z_]\\w*)\\s*(!)(?!=|is)",
+            "match": "\\b([a-z_]\\w*)\\s*(!)(?!=|is|in)",
             "captures": {
                 "1": {
                     "name": "entity.name.function.d",
