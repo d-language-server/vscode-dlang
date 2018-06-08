@@ -99,8 +99,7 @@ function launchServer(context: vsc.ExtensionContext, dlsPath: string) {
     const serverOptions: lc.ServerOptions = { command: dlsPath };
     const clientOptions: lc.LanguageClientOptions = {
         documentSelector: [{ scheme: 'file', language: 'd' }],
-        synchronize: { configurationSection: 'd.dls' },
-        initializationOptions: { lspExtensions: { upgradeDls: true } }
+        synchronize: { configurationSection: 'd.dls' }
     };
     const client = new lc.LanguageClient('vscode-dls', 'D Language', serverOptions, clientOptions);
     client.onReady().then(() => {
