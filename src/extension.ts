@@ -79,28 +79,39 @@ function launchServer(context: vsc.ExtensionContext, dlsPath: string) {
     };
     const client = new lc.LanguageClient('vscode-dls', 'D Language', serverOptions, clientOptions);
     client.onReady().then(() => {
-        let options: vsc.ProgressOptions = {
-            location: vsc.ProgressLocation.Notification,
-            title: 'Upgrading DLS...',
-            cancellable: false
-        };
-        let task: vsc.Progress<{ increment?: number, message?: string }>;
-        let totalSize = 0;
-        let currentSize = 0;
-        let resolve: lc.GenericNotificationHandler;
-        let updatePath = (path: string) => vsc.workspace.getConfiguration('d').update('dlsPath', path, vsc.ConfigurationTarget.Global);
-        client.onNotification('$/dls.upgradeDls.start', () => vsc.window.withProgress(options, t => new Promise(r => { task = t; resolve = r })));
-        client.onNotification('$/dls.upgradeDls.totalSize', (size: number) => { totalSize = size; });
-        client.onNotification('$/dls.upgradeDls.currentSize', (size: number) => {
-            task.report({
-                increment: 100 * (size - currentSize) / totalSize,
-                message: `Downloading... (${bytes(size)} / ${bytes(totalSize)})`
+        {
+            let options: vsc.ProgressOptions = {
+                location: vsc.ProgressLocation.Notification,
+                title: 'Upgrading DLS...',
+                cancellable: false
+            };
+            let task: vsc.Progress<{ increment?: number, message?: string }>;
+            let totalSize = 0;
+            let currentSize = 0;
+            let resolve: lc.GenericNotificationHandler;
+            client.onNotification('$/dls.upgradeDls.start', () => vsc.window.withProgress(options, t => new Promise(r => { task = t; resolve = r; })));
+            client.onNotification('$/dls.upgradeDls.totalSize', (size: number) => { totalSize = size; });
+            client.onNotification('$/dls.upgradeDls.currentSize', (size: number) => {
+                task.report({
+                    increment: 100 * (size - currentSize) / totalSize,
+                    message: `Downloading... (${bytes(size)} / ${bytes(totalSize)})`
+                });
+                currentSize = size;
             });
-            currentSize = size;
-        });
-        client.onNotification('$/dls.upgradeDls.extract', () => task.report({ message: 'Extracting...' }));
-        client.onNotification('$/dls.upgradeDls.stop', () => resolve());
-        client.onNotification('dls/didUpdatePath', updatePath);
+            client.onNotification('$/dls.upgradeDls.extract', () => task.report({ message: 'Extracting...' }));
+            client.onNotification('$/dls.upgradeDls.stop', () => resolve());
+        }
+
+        {
+            let options: vsc.ProgressOptions = {
+                location: vsc.ProgressLocation.Notification,
+                title: 'Upgrading selections...',
+                cancellable: false
+            };
+            let resolve: lc.GenericNotificationHandler;
+            client.onNotification('$/dls.upgradeSelections.start', () => vsc.window.withProgress(options, t => new Promise(r => resolve = r)));
+            client.onNotification('$/dls.upgradeSelections.stop', () => resolve());
+        }
     });
     context.subscriptions.push(client.start());
 }
