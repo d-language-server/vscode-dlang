@@ -170,11 +170,11 @@
         "@types/node": "^7.x.x",
         "tslint": "^5.10.0",
         "typescript": "^2.9.1",
-        "vsce": "^1.41.1",
+        "vsce": "^1.42.0",
         "vscode": "^1.1.18"
     },
     "dependencies": {
         "bytes": "^3.0.0",
-        "vscode-languageclient": "^4.1.4"
+        "vscode-languageclient": "^4.2.1"
     }
 }
