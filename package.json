@@ -169,7 +169,7 @@
         "@types/bytes": "^3.0.0",
         "@types/node": "^7.x.x",
         "tslint": "^5.10.0",
-        "typescript": "^2.9.1",
+        "typescript": "^2.9.2",
         "vsce": "^1.42.0",
         "vscode": "^1.1.18"
     },
