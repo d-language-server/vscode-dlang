@@ -574,10 +574,6 @@
             "match": "\\b(Error|Exception|Interface|Object|OffsetTypeInfo|RTInfo|Throwable|TypeInfo|TypeInfo_Class)\\b"
         },
         {
-            "name": "entity.name.type.d",
-            "match": "\\b[A-Z]\\w*\\b"
-        },
-        {
             "match": "\\b([a-z_]\\w*)\\s*(!)(?!=|is|in)",
             "captures": {
                 "1": {
@@ -616,6 +612,14 @@
                     "name": "variable.other.member.d"
                 }
             }
+        },
+        {
+            "name": "constant.other.d",
+            "match": "\\b[A-Z][A-Z0-9_]*\\b"
+        },
+        {
+            "name": "entity.name.type.d",
+            "match": "\\b[A-Z]\\w*\\b"
         },
         {
             "name": "punctuation.terminator.d",
