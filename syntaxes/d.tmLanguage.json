@@ -7,21 +7,15 @@
     ],
     "patterns": [
         {
-            "name": "meta.namespace.d",
-            "begin": "\\b(module)\\s+([\\w.]+)",
-            "beginCaptures": {
+            "match": "\\b(module)\\s+([^;]+)",
+            "captures": {
                 "1": {
                     "name": "storage.type.d"
                 },
                 "2": {
                     "name": "entity.name.namespace.d"
                 }
-            },
-            "patterns": [
-                {
-                    "include": "$self"
-                }
-            ]
+            }
         },
         {
             "begin": "\\b(import)\\s*\\(",
