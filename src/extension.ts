@@ -8,14 +8,13 @@ import * as vsc from 'vscode';
 import * as lc from 'vscode-languageclient';
 
 export function activate(context: vsc.ExtensionContext) {
-    let dlsPath = vsc.workspace.getConfiguration('d').get<string>('dlsPath')
-        || getDlsPath()
-        || context.globalState.get<string>('dlsPath')
-        || '';
+    let dlsPath = vsc.workspace.getConfiguration('d').get<string>('dlsPath') || getDlsPath();
 
     if (dlsPath.length) {
         try {
-            if (fs.statSync(dlsPath).isFile()) {
+            let stat = fs.statSync(dlsPath);
+
+            if (stat.isFile() || stat.isSymbolicLink()) {
                 return launchServer(context, dlsPath);
             }
         } catch (err) {
