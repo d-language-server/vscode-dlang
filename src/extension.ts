@@ -24,11 +24,7 @@ export function activate(context: vsc.ExtensionContext) {
     dlsPath = '';
 
     let dub = vsc.workspace.getConfiguration('d').get<string>('dubPath') || 'dub';
-    let options: vsc.ProgressOptions = {
-        location: vsc.ProgressLocation.Notification,
-        title: 'Installing DLS...',
-        cancellable: false
-    };
+    let options: vsc.ProgressOptions = { location: vsc.ProgressLocation.Notification };
 
     return vsc.window.withProgress(options, (progress) =>
         new Promise(resolve => cp.spawn(dub, ['fetch', 'dls']).on('exit', resolve))
@@ -36,6 +32,7 @@ export function activate(context: vsc.ExtensionContext) {
                 let bootstrap = cp.spawn(dub, ['run', '--quiet', 'dls:bootstrap', '--', '--progress']);
                 let totalSize = 0;
                 let currentSize = 0;
+
                 bootstrap.stdout.on('data', data => dlsPath += data.toString())
                     .on('end', resolve);
                 rl.createInterface(bootstrap.stderr)
@@ -43,14 +40,14 @@ export function activate(context: vsc.ExtensionContext) {
                         const size = Number(line);
 
                         if (line === 'extract') {
-                            progress.report({ message: 'Extracting DLS...' });
+                            progress.report({ message: 'Extracting' });
                         } else if (totalSize === 0) {
                             totalSize = size;
                         } else {
                             currentSize = size;
                             progress.report({
                                 increment: 100 * (size - currentSize) / totalSize,
-                                message: `Downloading...`
+                                message: `Downloading`
                             });
                         }
                     });
@@ -75,7 +72,7 @@ function launchServer(context: vsc.ExtensionContext, dlsPath: string) {
         documentSelector: [{ scheme: 'file', language: 'd' }],
         synchronize: { configurationSection: 'd.dls' }
     };
-    const client = new lc.LanguageClient('vscode-dls', 'D Language', serverOptions, clientOptions);
+    const client = new lc.LanguageClient('vscode-dls', 'DLS', serverOptions, clientOptions);
     client.onReady().then(() => {
         {
             let task: vsc.Progress<{ increment?: number, message?: string }>;
@@ -86,7 +83,7 @@ function launchServer(context: vsc.ExtensionContext, dlsPath: string) {
             client.onNotification('$/dls.upgradeDls.start',
                 (params: TranslationParams | null) => vsc.window.withProgress({
                     location: vsc.ProgressLocation.Notification,
-                    title: params ? params.tr : 'Upgrading DLS...'
+                    title: params ? params.tr : 'Upgrading DLS'
                 }, t => new Promise(r => { task = t; resolve = r; })));
             client.onNotification('$/dls.upgradeDls.totalSize', (params: DlsUpgradeSizeParams | number) => {
                 totalSize = typeof (params) !== 'number' ? params.size : params;
@@ -95,12 +92,12 @@ function launchServer(context: vsc.ExtensionContext, dlsPath: string) {
                 let size = typeof (params) !== 'number' ? params.size : params;
                 task.report({
                     increment: 100 * (size - currentSize) / totalSize,
-                    message: typeof (params) !== 'number' ? params.tr : `Downloading...`
+                    message: typeof (params) !== 'number' ? params.tr : `Downloading`
                 });
                 currentSize = size;
             });
             client.onNotification('$/dls.upgradeDls.extract',
-                (params: TranslationParams | null) => task.report({ message: params ? params.tr : 'Extracting...' }));
+                (params: TranslationParams | null) => task.report({ message: params ? params.tr : 'Extracting' }));
             client.onNotification('$/dls.upgradeDls.stop', () => resolve());
         }
 
@@ -110,7 +107,7 @@ function launchServer(context: vsc.ExtensionContext, dlsPath: string) {
             client.onNotification('$/dls.upgradeSelections.start',
                 (params: TranslationParams | null) => vsc.window.withProgress({
                     location: vsc.ProgressLocation.Notification,
-                    title: params ? params.tr : 'Upgrading selections...'
+                    title: params ? params.tr : 'Upgrading selections'
                 }, t => new Promise(r => resolve = r)));
             client.onNotification('$/dls.upgradeSelections.stop', () => resolve());
         }
