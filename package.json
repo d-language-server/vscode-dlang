@@ -42,13 +42,26 @@
             {
                 "id": "d",
                 "aliases": [
-                    "D"
+                    "D",
+                    "Dlang"
                 ],
                 "extensions": [
                     ".d",
                     ".di"
                 ],
                 "firstLine": "^#!.*rdmd",
+                "configuration": "./syntaxes/d.configuration.json"
+            },
+            {
+                "id": "dpp",
+                "aliases": [
+                    "D++",
+                    "DPP"
+                ],
+                "extensions": [
+                    ".dpp",
+                    ".d++"
+                ],
                 "configuration": "./syntaxes/d.configuration.json"
             }
         ],
@@ -57,6 +70,11 @@
                 "language": "d",
                 "scopeName": "source.d",
                 "path": "./syntaxes/d.tmLanguage.json"
+            },
+            {
+                "language": "dpp",
+                "scopeName": "source.dpp",
+                "path": "./syntaxes/dpp.tmLanguage.json"
             }
         ],
         "configuration": [

@@ -1,0 +1,24 @@
+{
+    "scopeName": "source.dpp",
+    "name": "D++",
+    "fileTypes": [
+        "dpp",
+        "d++"
+    ],
+    "patterns": [
+        {
+            "match": "(#include)\\s+([<\"][^\"]+[>\"])",
+            "captures": {
+                "1": {
+                    "name": "keyword.control.import.include.dpp"
+                },
+                "2": {
+                    "name": "string.quoted.double.include.dpp"
+                }
+            }
+        },
+        {
+            "include": "source.d"
+        }
+    ]
+}
