@@ -21,8 +21,9 @@
         "vscode": "^1.22.0"
     },
     "categories": [
-        "Languages",
+        "Programming Languages",
         "Formatters",
+        "Linters",
         "Other"
     ],
     "keywords": [
@@ -190,6 +191,6 @@
         "vscode": "^1.1.18"
     },
     "dependencies": {
-        "vscode-languageclient": "^4.3.0"
+        "vscode-languageclient": "^4.4.0"
     }
 }
