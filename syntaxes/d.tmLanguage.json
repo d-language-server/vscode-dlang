@@ -568,7 +568,7 @@
             "match": "\\b(Error|Exception|Interface|Object|OffsetTypeInfo|RTInfo|Throwable|TypeInfo|TypeInfo_Class)\\b"
         },
         {
-            "match": "\\b([a-z_]\\w*)\\s*(!)(?!=|is|in)",
+            "match": "\\b([a-z_]\\w*)\\s*(!)(?!=|is\\b|in\\b)",
             "captures": {
                 "1": {
                     "name": "entity.name.function.d",
