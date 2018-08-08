@@ -7,7 +7,7 @@
     "preview": true,
     "publisher": "LaurentTreguier",
     "repository": {
-        "url": "https://github.com/LaurentTreguier",
+        "url": "https://github.com/LaurentTreguier/vscode-dls",
         "type": "git"
     },
     "author": {
