@@ -489,7 +489,7 @@
         },
         {
             "name": "keyword.other.d",
-            "match": "\\b(assert|cast|deprecated|is|macro|mixin|new|typeid|typeof)\\b"
+            "match": "\\b(assert|cast|deprecated|in|is|macro|mixin|new|out|typeid|typeof)\\b"
         },
         {
             "name": "storage.modifier.attribute.d",
@@ -533,7 +533,7 @@
         },
         {
             "name": "storage.modifier.d",
-            "match": "\\b(abstract|alias|align|auto|const|extern|final|immutable|in|inout|lazy|nothrow|out|override|pure|ref|scope|shared|static|volatile|__gshared)\\b"
+            "match": "\\b(abstract|alias|align|auto|const|extern|final|immutable|inout|lazy|nothrow|override|pure|ref|scope|shared|static|volatile|__gshared)\\b"
         },
         {
             "name": "storage.type.character.d",
