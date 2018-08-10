@@ -584,7 +584,7 @@
             }
         },
         {
-            "match": "(?<!!)\\b([a-z_]\\w*)\\s*(?=\\()",
+            "match": "(?<!\\w!)\\b([a-z_]\\w*)\\s*(?=\\()",
             "captures": {
                 "1": {
                     "name": "entity.name.function.d",
