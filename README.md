@@ -1,5 +1,7 @@
 # VSCode DLS: D support for Visual Studio Code
 
+[![Visual Studio Marketplace](https://img.shields.io/vscode-marketplace/v/LaurentTreguier.vscode-dls.svg?style=flat-square)](https://marketplace.visualstudio.com/items?itemName=LaurentTreguier.vscode-dls)
+
 A Visual Studio Code extension for [Dlang](https://dlang.org).
 Provides syntax highlighting and editing features using the [Language Server protocol](https://microsoft.github.io/language-server-protocol).
 
@@ -12,4 +14,4 @@ Far from every possible feature is implemented, but the server will offer update
 
 ## Requirements
 
-Dub should be installed for the extension to install DLS itself.
+Dub and either DMD or LDC should be installed for the extension to work properly.
