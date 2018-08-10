@@ -7,6 +7,10 @@ import * as rl from 'readline';
 import * as vsc from 'vscode';
 import * as lc from 'vscode-languageclient';
 
+const isWindows = process.platform === 'win32';
+const dmd = isWindows ? 'dmd.exe' : 'dmd';
+const ldc = isWindows ? 'ldc2.exe' : 'ldc2';
+
 export function activate(context: vsc.ExtensionContext) {
     let dlsPath = vsc.workspace.getConfiguration('d').get<string>('dlsPath') || getDlsPath();
 
@@ -24,12 +28,27 @@ export function activate(context: vsc.ExtensionContext) {
     dlsPath = '';
 
     let dub = vsc.workspace.getConfiguration('d').get<string>('dubPath') || 'dub';
+    let compiler = getCompiler();
     let options: vsc.ProgressOptions = { location: vsc.ProgressLocation.Notification };
 
+    if (!compiler) {
+        vsc.window.showErrorMessage('No compiler found in PATH');
+        return;
+    }
+
     return vsc.window.withProgress(options, (progress) =>
-        new Promise(resolve => cp.spawn(dub, ['fetch', 'dls']).on('exit', resolve))
+        new Promise(resolve => cp.spawn(dub, ['remove', '--version=*', 'dls']).on('exit', resolve))
+            .then(() => new Promise(resolve => cp.spawn(dub, ['fetch', 'dls']).on('exit', resolve)))
             .then(() => new Promise(resolve => {
-                let bootstrap = cp.spawn(dub, ['run', '--quiet', 'dls:bootstrap', '--', '--progress']);
+                let args = ['run', '--compiler=' + compiler, '--quiet', 'dls:bootstrap'];
+
+                if (process.arch === 'x64') {
+                    args.push('--arch=x86_64');
+                }
+
+                args.push('--', '--progress');
+
+                let bootstrap = cp.spawn(dub, args);
                 let totalSize = 0;
                 let currentSize = 0;
 
@@ -59,11 +78,25 @@ export function deactivate() {
 }
 
 function getDlsPath() {
-    const isWindows = process.platform === 'win32';
     return path.join(<string>process.env[isWindows ? 'LOCALAPPDATA' : 'HOME'],
         isWindows ? 'dub' : '.dub',
         'packages', '.bin',
         isWindows ? 'dls.exe' : 'dls');
+}
+
+function getCompiler() {
+    for (let p of process.env['PATH']!.split(isWindows ? ';' : ':')) {
+        for (let compiler of [dmd, ldc]) {
+            try {
+                fs.statSync(path.join(p, compiler))
+                return compiler;
+            }
+            catch (err) {
+            }
+        }
+    }
+
+    return null;
 }
 
 function launchServer(context: vsc.ExtensionContext, dlsPath: string) {
