@@ -16,11 +16,8 @@ export function activate(context: vsc.ExtensionContext) {
 
     if (dlsPath.length) {
         try {
-            let stat = fs.statSync(dlsPath);
-
-            if (stat.isFile() || stat.isSymbolicLink()) {
-                return launchServer(context, dlsPath);
-            }
+            fs.statSync(dlsPath);
+            return launchServer(context, dlsPath);
         } catch (err) {
         }
     }
@@ -78,10 +75,18 @@ export function deactivate() {
 }
 
 function getDlsPath() {
-    return path.join(<string>process.env[isWindows ? 'LOCALAPPDATA' : 'HOME'],
+    let dlsExecutable = isWindows ? 'dls.exe' : 'dls';
+    let dlsDir = path.join(<string>process.env[isWindows ? 'LOCALAPPDATA' : 'HOME'],
         isWindows ? 'dub' : '.dub',
-        'packages', '.bin',
-        isWindows ? 'dls.exe' : 'dls');
+        'packages', '.bin');
+
+    try {
+        let dls = path.join(dlsDir, 'dls-latest', dlsExecutable);
+        fs.statSync(dls);
+        return dls;
+    } catch (err) {
+        return path.join(dlsDir, dlsExecutable);
+    }
 }
 
 function getCompiler() {
