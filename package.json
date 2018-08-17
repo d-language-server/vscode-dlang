@@ -221,12 +221,12 @@
         "test": "npm run compile && node ./node_modules/vscode/bin/test"
     },
     "devDependencies": {
-        "@types/node": "^7.x.x",
+        "@types/node": "^8.x.x",
         "typescript": "^3.0.1",
         "vsce": "^1.46.0",
-        "vscode": "^1.1.18"
+        "vscode": "^1.1.21"
     },
     "dependencies": {
-        "vscode-languageclient": "^4.4.0"
+        "vscode-languageclient": "^5.0.0"
     }
 }
