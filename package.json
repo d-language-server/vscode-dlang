@@ -129,6 +129,38 @@
                         ],
                         "default": null
                     },
+                    "d.init.hover": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "d.init.completion": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "d.init.definition": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "d.init.documentHighlight": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "d.init.documentSymbol": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "d.init.workspaceSymbol": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "d.init.documentFormatting": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "d.init.rename": {
+                        "type": "boolean",
+                        "default": true
+                    },
                     "d.dls.symbol.importPaths": {
                         "type": "array",
                         "default": []
