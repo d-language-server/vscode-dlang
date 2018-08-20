@@ -118,154 +118,192 @@
             {
                 "title": "D",
                 "properties": {
-                    "d.dubPath": {
-                        "description": "Path to the dub executable",
-                        "type": "string",
-                        "default": "dub"
-                    },
-                    "d.dlsPath": {
-                        "description": "Path to the dls executable",
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "default": null
-                    },
-                    "d.init.capabilities.hover": {
-                        "description": "Enable hover",
-                        "type": "boolean",
-                        "default": true
-                    },
-                    "d.init.capabilities.completion": {
-                        "description": "Enable completion",
-                        "type": "boolean",
-                        "default": true
-                    },
-                    "d.init.capabilities.definition": {
-                        "description": "Enable go-to-definition",
-                        "type": "boolean",
-                        "default": true
-                    },
-                    "d.init.capabilities.documentHighlight": {
-                        "description": "Enable symbol highlighting",
-                        "type": "boolean",
-                        "default": true
-                    },
-                    "d.init.capabilities.documentSymbol": {
-                        "description": "Enable document symbol search",
-                        "type": "boolean",
-                        "default": true
-                    },
-                    "d.init.capabilities.workspaceSymbol": {
-                        "description": "Enable workspace symbol search",
-                        "type": "boolean",
-                        "default": true
-                    },
-                    "d.init.capabilities.documentFormatting": {
-                        "description": "Enable formatting",
-                        "type": "boolean",
-                        "default": true
-                    },
-                    "d.init.capabilities.rename": {
-                        "description": "Enable renaming",
-                        "type": "boolean",
-                        "default": true
-                    },
-                    "d.dls.symbol.importPaths": {
-                        "description": "Import paths",
-                        "type": "array",
-                        "default": []
-                    },
-                    "d.dls.analysis.configFile": {
-                        "description": "D-Scanner config file",
-                        "type": "string",
-                        "default": "dscanner.ini"
-                    },
-                    "d.dls.format.endOfLine": {
-                        "description": "End of line",
-                        "type": "string",
-                        "enum": [
-                            "lf",
-                            "cr",
-                            "crlf"
-                        ],
-                        "default": "lf"
-                    },
-                    "d.dls.format.maxLineLength": {
-                        "description": "Max line length",
-                        "type": "number",
-                        "default": 120
-                    },
-                    "d.dls.format.dfmtAlignSwitchStatements": {
-                        "description": "Align switch statements",
-                        "type": "boolean",
-                        "default": true
-                    },
-                    "d.dls.format.dfmtBraceStyle": {
-                        "description": "Brace style",
-                        "type": "string",
-                        "enum": [
-                            "allman",
-                            "otbs",
-                            "stroustrup"
-                        ],
-                        "default": "allman"
-                    },
-                    "d.dls.format.dfmtOutdentAttributes": {
-                        "description": "Outdent attributes",
-                        "type": "boolean",
-                        "default": true
-                    },
-                    "d.dls.format.dfmtSoftMaxLineLength": {
-                        "description": "Soft max line length",
-                        "type": "number",
-                        "default": 80
-                    },
-                    "d.dls.format.dfmtSpaceAfterCast": {
-                        "description": "Space after cast",
-                        "type": "boolean",
-                        "default": true
-                    },
-                    "d.dls.format.dfmtSpaceAfterKeywords": {
-                        "description": "Space after keywords",
-                        "type": "boolean",
-                        "default": true
-                    },
-                    "d.dls.format.dfmtSpaceBeforeFunctionParameters": {
-                        "description": "Space before function parameters",
-                        "type": "boolean",
-                        "default": false
-                    },
-                    "d.dls.format.dfmtSplitOperatorAtLineEnd": {
-                        "description": "Split operator at line end",
-                        "type": "boolean",
-                        "default": false
-                    },
-                    "d.dls.format.dfmtSelectiveImportSpace": {
-                        "description": "Selective import space",
-                        "type": "boolean",
-                        "default": true
-                    },
-                    "d.dls.format.dfmtCompactLabeledStatements": {
-                        "description": "Compact labeled statements",
-                        "type": "boolean",
-                        "default": true
-                    },
-                    "d.dls.format.dfmtTemplateConstraintStyle": {
-                        "description": "Template constraint style",
-                        "type": "string",
-                        "enum": [
-                            "conditionalNewlineIndent",
-                            "conditionalNewline",
-                            "alwaysNewline",
-                            "alwaysNewlineIndent"
-                        ],
-                        "default": "conditionalNewlineIndent"
-                    },
-                    "d.dls.format.dfmtSingleTemplateConstraintIndent": {
-                        "description": "Single template constraint indent",
-                        "type": "boolean",
-                        "default": false
+                    "d": {
+                        "type": "object",
+                        "properties": {
+                            "dubPath": {
+                                "description": "Path to the dub executable",
+                                "type": "string",
+                                "default": "dub"
+                            },
+                            "dlsPath": {
+                                "description": "Path to the dls executable",
+                                "type": "string",
+                                "default": ""
+                            },
+                            "init": {
+                                "description": "DLS initatization options",
+                                "type": "object",
+                                "properties": {
+                                    "capabilities": {
+                                        "description": "DLS enabled capabilities",
+                                        "type": "object",
+                                        "properties": {
+                                            "hover": {
+                                                "description": "Enable hover",
+                                                "type": "boolean",
+                                                "default": true
+                                            },
+                                            "completion": {
+                                                "description": "Enable completion",
+                                                "type": "boolean",
+                                                "default": true
+                                            },
+                                            "definition": {
+                                                "description": "Enable go-to-definition",
+                                                "type": "boolean",
+                                                "default": true
+                                            },
+                                            "documentHighlight": {
+                                                "description": "Enable symbol highlighting",
+                                                "type": "boolean",
+                                                "default": true
+                                            },
+                                            "documentSymbol": {
+                                                "description": "Enable document symbol search",
+                                                "type": "boolean",
+                                                "default": true
+                                            },
+                                            "workspaceSymbol": {
+                                                "description": "Enable workspace symbol search",
+                                                "type": "boolean",
+                                                "default": true
+                                            },
+                                            "documentFormatting": {
+                                                "description": "Enable formatting",
+                                                "type": "boolean",
+                                                "default": true
+                                            },
+                                            "rename": {
+                                                "description": "Enable renaming",
+                                                "type": "boolean",
+                                                "default": true
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "dls": {
+                                "description": "DLS configuration",
+                                "type": "object",
+                                "properties": {
+                                    "symbol": {
+                                        "description": "Symbols",
+                                        "type": "object",
+                                        "properties": {
+                                            "importPaths": {
+                                                "description": "Import paths",
+                                                "type": "array",
+                                                "default": []
+                                            }
+                                        }
+                                    },
+                                    "analysis": {
+                                        "description": "Analysis",
+                                        "type": "object",
+                                        "properties": {
+                                            "configFile": {
+                                                "description": "D-Scanner config file",
+                                                "type": "string",
+                                                "default": "dscanner.ini"
+                                            }
+                                        }
+                                    },
+                                    "format": {
+                                        "description": "Formatting",
+                                        "type": "object",
+                                        "properties": {
+                                            "endOfLine": {
+                                                "description": "End of line",
+                                                "type": "string",
+                                                "enum": [
+                                                    "lf",
+                                                    "cr",
+                                                    "crlf"
+                                                ],
+                                                "default": "lf"
+                                            },
+                                            "maxLineLength": {
+                                                "description": "Max line length",
+                                                "type": "number",
+                                                "default": 120
+                                            },
+                                            "dfmtAlignSwitchStatements": {
+                                                "description": "Align switch statements",
+                                                "type": "boolean",
+                                                "default": true
+                                            },
+                                            "dfmtBraceStyle": {
+                                                "description": "Brace style",
+                                                "type": "string",
+                                                "enum": [
+                                                    "allman",
+                                                    "otbs",
+                                                    "stroustrup"
+                                                ],
+                                                "default": "allman"
+                                            },
+                                            "dfmtOutdentAttributes": {
+                                                "description": "Outdent attributes",
+                                                "type": "boolean",
+                                                "default": true
+                                            },
+                                            "dfmtSoftMaxLineLength": {
+                                                "description": "Soft max line length",
+                                                "type": "number",
+                                                "default": 80
+                                            },
+                                            "dfmtSpaceAfterCast": {
+                                                "description": "Space after cast",
+                                                "type": "boolean",
+                                                "default": true
+                                            },
+                                            "dfmtSpaceAfterKeywords": {
+                                                "description": "Space after keywords",
+                                                "type": "boolean",
+                                                "default": true
+                                            },
+                                            "dfmtSpaceBeforeFunctionParameters": {
+                                                "description": "Space before function parameters",
+                                                "type": "boolean",
+                                                "default": false
+                                            },
+                                            "dfmtSplitOperatorAtLineEnd": {
+                                                "description": "Split operator at line end",
+                                                "type": "boolean",
+                                                "default": false
+                                            },
+                                            "dfmtSelectiveImportSpace": {
+                                                "description": "Selective import space",
+                                                "type": "boolean",
+                                                "default": true
+                                            },
+                                            "dfmtCompactLabeledStatements": {
+                                                "description": "Compact labeled statements",
+                                                "type": "boolean",
+                                                "default": true
+                                            },
+                                            "dfmtTemplateConstraintStyle": {
+                                                "description": "Template constraint style",
+                                                "type": "string",
+                                                "enum": [
+                                                    "conditionalNewlineIndent",
+                                                    "conditionalNewline",
+                                                    "alwaysNewline",
+                                                    "alwaysNewlineIndent"
+                                                ],
+                                                "default": "conditionalNewlineIndent"
+                                            },
+                                            "dfmtSingleTemplateConstraintIndent": {
+                                                "description": "Single template constraint indent",
+                                                "type": "boolean",
+                                                "default": false
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
