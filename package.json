@@ -129,35 +129,35 @@
                         ],
                         "default": null
                     },
-                    "d.init.hover": {
+                    "d.init.capabilities.hover": {
                         "type": "boolean",
                         "default": true
                     },
-                    "d.init.completion": {
+                    "d.init.capabilities.completion": {
                         "type": "boolean",
                         "default": true
                     },
-                    "d.init.definition": {
+                    "d.init.capabilities.definition": {
                         "type": "boolean",
                         "default": true
                     },
-                    "d.init.documentHighlight": {
+                    "d.init.capabilities.documentHighlight": {
                         "type": "boolean",
                         "default": true
                     },
-                    "d.init.documentSymbol": {
+                    "d.init.capabilities.documentSymbol": {
                         "type": "boolean",
                         "default": true
                     },
-                    "d.init.workspaceSymbol": {
+                    "d.init.capabilities.workspaceSymbol": {
                         "type": "boolean",
                         "default": true
                     },
-                    "d.init.documentFormatting": {
+                    "d.init.capabilities.documentFormatting": {
                         "type": "boolean",
                         "default": true
                     },
-                    "d.init.rename": {
+                    "d.init.capabilities.rename": {
                         "type": "boolean",
                         "default": true
                     },

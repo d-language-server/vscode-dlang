@@ -105,18 +105,11 @@ function getCompiler() {
 }
 
 function launchServer(context: vsc.ExtensionContext, dlsPath: string) {
-    const conf = vsc.workspace.getConfiguration('d.init');
-    let capabilities: any = {};
-
-    for (let option of ['hover', 'completion', 'definition', 'documentHighlight', 'documentSymbol', 'workspaceSymbol', 'documentFormatting', 'rename']) {
-        capabilities[option] = conf.get(option);
-    }
-
     const serverOptions: lc.ServerOptions = { command: dlsPath };
     const clientOptions: lc.LanguageClientOptions = {
         documentSelector: [{ scheme: 'file', language: 'd' }],
         synchronize: { configurationSection: 'd.dls' },
-        initializationOptions: { capabilities: capabilities }
+        initializationOptions: vsc.workspace.getConfiguration('d').get('init')
     };
     const client = new lc.LanguageClient('vscode-dls', 'DLS', serverOptions, clientOptions);
     client.onReady().then(() => {
