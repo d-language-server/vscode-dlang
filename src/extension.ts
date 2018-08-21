@@ -6,12 +6,14 @@ import * as cp from 'child_process';
 import * as rl from 'readline';
 import * as vsc from 'vscode';
 import * as lc from 'vscode-languageclient';
+import DubTaskProvider from './taskProvider';
 
 const isWindows = process.platform === 'win32';
 const dmd = isWindows ? 'dmd.exe' : 'dmd';
 const ldc = isWindows ? 'ldc2.exe' : 'ldc2';
 
 export function activate(context: vsc.ExtensionContext) {
+    vsc.workspace.registerTaskProvider('dub', new DubTaskProvider());
     let dlsPath = vsc.workspace.getConfiguration('d').get<string>('dlsPath') || getDlsPath();
 
     if (dlsPath.length) {
@@ -147,7 +149,7 @@ function launchServer(context: vsc.ExtensionContext, dlsPath: string) {
                 (params: TranslationParams | null) => vsc.window.withProgress({
                     location: vsc.ProgressLocation.Notification,
                     title: params ? params.tr : 'Upgrading selections'
-                }, t => new Promise(r => resolve = r)));
+                }, () => new Promise(r => resolve = r)));
             client.onNotification('$/dls.upgradeSelections.stop', () => resolve());
         }
     });

@@ -114,6 +114,75 @@
                 "message": 3
             }
         ],
+        "taskDefinitions": [
+            {
+                "type": "dub",
+                "properties": {
+                    "task": {
+                        "description": "The dub task to launch",
+                        "enum": [
+                            "build",
+                            "test"
+                        ]
+                    },
+                    "build": {
+                        "description": "The build type",
+                        "type": "string",
+                        "anyOf": [
+                            {
+                                "enum": [
+                                    "plain",
+                                    "debug",
+                                    "release",
+                                    "release-debug",
+                                    "release-nobounds",
+                                    "unittest",
+                                    "docs",
+                                    "ddox",
+                                    "profile",
+                                    "profile-gc",
+                                    "cov",
+                                    "unittest-cov"
+                                ]
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    },
+                    "config": {
+                        "description": "The build configuration",
+                        "type": "string"
+                    },
+                    "compiler": {
+                        "description": "The compiler used by dub",
+                        "enum": [
+                            "dmd",
+                            "ldc2",
+                            "gdc"
+                        ]
+                    },
+                    "arch": {
+                        "description": "The target architecture",
+                        "anyOf": [
+                            {
+                                "enum": [
+                                    "x86",
+                                    "x86_mscoff",
+                                    "x86_64"
+                                ]
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                },
+                "required": [
+                    "task"
+                ]
+            }
+        ],
         "configuration": [
             {
                 "title": "D",
@@ -220,7 +289,6 @@
                                         "properties": {
                                             "endOfLine": {
                                                 "description": "End of line",
-                                                "type": "string",
                                                 "enum": [
                                                     "lf",
                                                     "cr",
@@ -240,7 +308,6 @@
                                             },
                                             "dfmtBraceStyle": {
                                                 "description": "Brace style",
-                                                "type": "string",
                                                 "enum": [
                                                     "allman",
                                                     "otbs",
@@ -290,7 +357,6 @@
                                             },
                                             "dfmtTemplateConstraintStyle": {
                                                 "description": "Template constraint style",
-                                                "type": "string",
                                                 "enum": [
                                                     "conditionalNewlineIndent",
                                                     "conditionalNewline",
