@@ -7,7 +7,7 @@
     "preview": true,
     "publisher": "LaurentTreguier",
     "repository": {
-        "url": "https://github.com/LaurentTreguier/vscode-dls",
+        "url": "https://github.com/d-language-server/vscode-dls",
         "type": "git"
     },
     "author": {
@@ -15,7 +15,7 @@
         "url": "https://github.com/LaurentTreguier"
     },
     "bugs": {
-        "url": "https://github.com/LaurentTreguier/vscode-dls/issues"
+        "url": "https://github.com/d-language-server/vscode-dls/issues"
     },
     "engines": {
         "vscode": "^1.25.1"
