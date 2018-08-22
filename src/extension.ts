@@ -6,7 +6,7 @@ import * as cp from 'child_process';
 import * as rl from 'readline';
 import * as vsc from 'vscode';
 import * as lc from 'vscode-languageclient';
-import DubTaskProvider from './taskProvider';
+import DubTaskProvider from './task-provider';
 
 const isWindows = process.platform === 'win32';
 const dmd = isWindows ? 'dmd.exe' : 'dmd';
