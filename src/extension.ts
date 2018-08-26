@@ -41,7 +41,7 @@ export function activate(context: vsc.ExtensionContext) {
             .then(() => new Promise(resolve => {
                 let args = ['run', '--compiler=' + compiler, '--quiet', 'dls:bootstrap'];
 
-                if (process.arch === 'x64') {
+                if (isWindows && compiler === 'ldc2.exe' && process.arch === 'x64') {
                     args.push('--arch=x86_64');
                 }
 
