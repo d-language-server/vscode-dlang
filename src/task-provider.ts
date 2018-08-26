@@ -14,7 +14,9 @@ export default class DubTaskProvider implements vsc.TaskProvider {
 
             for (let option of ['build', 'config', 'compiler', 'arch']) {
                 if (option in taskDef) {
-                    args.push(`--${option}=${taskDef[option]}`);
+                    if (taskDef[option]) {
+                        args.push(`--${option}=${taskDef[option]}`);
+                    }
                 }
             }
 
