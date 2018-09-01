@@ -389,11 +389,11 @@
     },
     "devDependencies": {
         "@types/node": "^8.x.x",
-        "typescript": "^3.0.1",
-        "vsce": "^1.46.0",
+        "typescript": "^3.0.3",
+        "vsce": "^1.47.0",
         "vscode": "^1.1.21"
     },
     "dependencies": {
-        "vscode-languageclient": "^5.0.0"
+        "vscode-languageclient": "^5.0.1"
     }
 }
