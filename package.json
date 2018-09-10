@@ -217,6 +217,16 @@
                         "type": "boolean",
                         "default": true
                     },
+                    "d.init.capabilities.typeDefinition": {
+                        "description": "Enable go-to-type-definition",
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "d.init.capabilities.references": {
+                        "description": "Enable references search",
+                        "type": "boolean",
+                        "default": true
+                    },
                     "d.init.capabilities.documentHighlight": {
                         "description": "Enable symbol highlighting",
                         "type": "boolean",
