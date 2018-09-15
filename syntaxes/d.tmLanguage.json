@@ -597,7 +597,7 @@
             }
         },
         {
-            "match": "(?<=\\.)\\s*(?:(alignof|assumeSafeAppend|capacity|classinfo|clear|dig|dup|epsilon|hashOf|idup|im|infinity|init|keys|mangleof|mant_dig|max|max(?:_10)?_exp|min|min(?:_10)?_exp|min_normal|nan|ptr|re|rehash|reserve|sizeof|stringof|values)|([a-zA-Z_]\\w*))\\b",
+            "match": "(?<=[^.]\\.)\\s*(?:(alignof|assumeSafeAppend|capacity|classinfo|clear|dig|dup|epsilon|hashOf|idup|im|infinity|init|keys|mangleof|mant_dig|max|max(?:_10)?_exp|min|min(?:_10)?_exp|min_normal|nan|ptr|re|rehash|reserve|sizeof|stringof|values)|([a-zA-Z_]\\w*))\\b",
             "captures": {
                 "1": {
                     "name": "support.constant.property.d"
