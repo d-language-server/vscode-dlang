@@ -64,6 +64,27 @@
                     ".d++"
                 ],
                 "configuration": "./syntaxes/d.configuration.json"
+            },
+            {
+                "id": "diet",
+                "aliases": [
+                    "Diet"
+                ],
+                "extensions": [
+                    ".dt"
+                ],
+                "configuration": "./syntaxes/diet.configuration.json"
+            },
+            {
+                "id": "sdl",
+                "aliases": [
+                    "SDL",
+                    "SDLang"
+                ],
+                "extensions": [
+                    ".sdl"
+                ],
+                "configuration": "./syntaxes/sdl.configuration.json"
             }
         ],
         "grammars": [
@@ -76,6 +97,16 @@
                 "language": "dpp",
                 "scopeName": "source.dpp",
                 "path": "./syntaxes/dpp.tmLanguage.json"
+            },
+            {
+                "language": "diet",
+                "scopeName": "source.diet",
+                "path": "./syntaxes/diet.tmLanguage.json"
+            },
+            {
+                "language": "sdl",
+                "scopeName": "source.sdl",
+                "path": "./syntaxes/sdl.tmLanguage.json"
             }
         ],
         "problemMatchers": [

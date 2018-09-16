@@ -1,0 +1,137 @@
+{
+    "scopeName": "source.sdl",
+    "name": "SDL",
+    "fileTypes": [
+        "sdl"
+    ],
+    "patterns": [
+        {
+            "name": "comment.line.double-slash.sdl",
+            "match": "//.*$"
+        },
+        {
+            "name": "comment.line.double-dash.sdl",
+            "match": "--.*$"
+        },
+        {
+            "name": "comment.line.number-sign.sdl",
+            "match": "#.*$"
+        },
+        {
+            "name": "comment.block.sdl",
+            "begin": "/\\*",
+            "end": "\\*/"
+        },
+        {
+            "name": "string.quoted.double.sdl",
+            "begin": "\"",
+            "end": "\"",
+            "patterns": [
+                {
+                    "include": "#escaped-char"
+                },
+                {
+                    "include": "#escaped-newline"
+                }
+            ]
+        },
+        {
+            "name": "string.quoted.other.backtick.sdl",
+            "begin": "`",
+            "end": "`"
+        },
+        {
+            "name": "string.quoted.single.sdl",
+            "begin": "'",
+            "end": "'",
+            "patterns": [
+                {
+                    "include": "#escaped-char"
+                },
+                {
+                    "include": "#oversized-char"
+                }
+            ]
+        },
+        {
+            "name": "string.unquoted.base64.sdl",
+            "begin": "\\[",
+            "end": "\\]",
+            "patterns": [
+                {
+                    "include": "#unknown-base64-char"
+                }
+            ]
+        },
+        {
+            "name": "constant.language.boolean.sdl",
+            "match": "\\b(?:true|false|on|off)\\b"
+        },
+        {
+            "name": "constant.language.null.sdl",
+            "match": "\\bnull\\b"
+        },
+        {
+            "name": "constant.other.date.sdl",
+            "match": "\\b\\d{4}/\\d{2}/\\d{2}(?:\\s+(?:\\d+d:)?\\d+:\\d+:\\d+\\.?\\d*(?:-[A-Z]{3})?)?\\b"
+        },
+        {
+            "name": "constant.other.duration.sdl",
+            "match": "\\b(?:\\d+d:)?\\d+:\\d+:\\d+(?:\\.\\d+)?\\b"
+        },
+        {
+            "name": "constant.numeric.decimal.sdl",
+            "match": "\\b\\d+(\\.\\d+)?(L|l|F|f|D|d|BD|bd)?\\b"
+        },
+        {
+            "match": "\\b([a-zA-Z_][\\w\\-$.]*(:[a-zA-Z_][\\w\\-$.]*)?)=",
+            "captures": {
+                "1": {
+                    "name": "entity.other.attribute-name.sdl"
+                }
+            }
+        },
+        {
+            "match": "(?:^|;|\\{)\\s*([a-zA-Z_][\\w\\-$.]*(?::[a-zA-Z_][\\w\\-$.]*)?)\\b",
+            "captures": {
+                "1": {
+                    "name": "entity.name.tag.sdl"
+                }
+            }
+        }
+    ],
+    "repository": {
+        "escaped-char": {
+            "patterns": [
+                {
+                    "name": "constant.character.escape.sdl",
+                    "match": "\\\\."
+                }
+            ]
+        },
+        "escaped-newline": {
+            "patterns": [
+                {
+                    "name": "constant.character.escape.sdl",
+                    "match": "\\\\"
+                }
+            ]
+        },
+        "oversized-char": {
+            "patterns": [
+                {
+                    "name": "invalid.illegal.oversized-character.sdl",
+                    "match": "..."
+                }
+            ]
+        },
+        "unknown-base64-char": {
+            "patterns": [
+                {
+                    "name": "invalid.illegal.unknown-base64-character.sdl",
+                    "match": "[^0-9a-zA-Z+/=]"
+                }
+            ]
+        }
+    }
+}

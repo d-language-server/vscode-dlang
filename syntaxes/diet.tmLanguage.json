@@ -1,0 +1,334 @@
+{
+    "scopeName": "source.diet",
+    "name": "Diet",
+    "fileTypes": [
+        "dt"
+    ],
+    "patterns": [
+        {
+            "name": "comment.line.double-slash.diet",
+            "match": "(//-?).*",
+            "captures": {
+                "1": {
+                    "name": "punctuation.definition.comment.d"
+                }
+            }
+        },
+        {
+            "match": "^\\s*(-)\\s*(.*)",
+            "captures": {
+                "1": {
+                    "name": "keyword.operator.diet"
+                },
+                "2": {
+                    "patterns": [
+                        {
+                            "include": "source.d"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "match": "^\\s*(\\|)(.*)",
+            "captures": {
+                "1": {
+                    "name": "keyword.operator.diet"
+                },
+                "2": {
+                    "patterns": [
+                        {
+                            "include": "#tag-content"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "match": "\\b(doctype)\\s+(.*)",
+            "captures": {
+                "1": {
+                    "name": "keyword.control.doctype.diet"
+                },
+                "2": {
+                    "name": "entity.name.section.diet"
+                }
+            }
+        },
+        {
+            "match": "^\\s*(block|extends|include)\\s+(\\w+)",
+            "captures": {
+                "1": {
+                    "name": "storage.type.diet"
+                },
+                "2": {
+                    "name": "variable.other.diet"
+                }
+            }
+        },
+        {
+            "begin": "(\\s*)(:)(css)\\b",
+            "end": "^(?!\\1\\s)(?=\\s*\\S)",
+            "beginCaptures": {
+                "2": {
+                    "name": "storage.type.diet"
+                },
+                "3": {
+                    "name": "entity.name.tag.filter.css.diet"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "source.css"
+                }
+            ]
+        },
+        {
+            "begin": "(\\s*)(:)(htmlescape)\\b",
+            "end": "^(?!\\1\\s)(?=\\s*\\S)",
+            "beginCaptures": {
+                "2": {
+                    "name": "storage.type.diet"
+                },
+                "3": {
+                    "name": "entity.name.tag.filter.htmlescape.diet"
+                }
+            }
+        },
+        {
+            "begin": "(\\s*)(:)(javascript)\\b",
+            "end": "^(?!\\1\\s)(?=\\s*\\S)",
+            "beginCaptures": {
+                "2": {
+                    "name": "storage.type.diet"
+                },
+                "3": {
+                    "name": "entity.name.tag.filter.javascript.diet"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "source.js"
+                }
+            ]
+        },
+        {
+            "begin": "(\\s*)(:)(markdown)\\b",
+            "end": "^(?!\\1\\s)(?=\\s*\\S)",
+            "beginCaptures": {
+                "2": {
+                    "name": "storage.type.diet"
+                },
+                "3": {
+                    "name": "entity.name.tag.filter.markdown.diet"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "text.html.markdown"
+                }
+            ]
+        },
+        {
+            "name": "meta.tag.diet",
+            "match": "^\\s*([-:\\w]+)?(?:(#)([-\\w]+))?((?:\\.[-\\w]+)*)(?<=\\S)(.*)",
+            "captures": {
+                "1": {
+                    "name": "entity.name.tag.diet"
+                },
+                "2": {
+                    "name": "storage.type.id.diet"
+                },
+                "3": {
+                    "name": "entity.name.id.diet"
+                },
+                "4": {
+                    "patterns": [
+                        {
+                            "name": "storage.type.class.diet",
+                            "match": "\\."
+                        },
+                        {
+                            "name": "entity.name.class.diet",
+                            "match": "."
+                        }
+                    ]
+                },
+                "5": {
+                    "patterns": [
+                        {
+                            "match": "\\s+.*",
+                            "captures": {
+                                "0": {
+                                    "patterns": [
+                                        {
+                                            "include": "#tag-content"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "include": "#tag-attributes"
+                        }
+                    ]
+                }
+            }
+        }
+    ],
+    "repository": {
+        "escaped-char": {
+            "name": "constant.character.escape.diet",
+            "match": "\\\\."
+        },
+        "tag-attributes": {
+            "begin": "\\(",
+            "end": "\\)(.*)",
+            "beginCaptures": {
+                "0": {
+                    "name": "punctuation.section.parens.begin.diet"
+                }
+            },
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.section.parens.end.diet"
+                },
+                "1": {
+                    "patterns": [
+                        {
+                            "include": "#tag-content"
+                        }
+                    ]
+                }
+            },
+            "patterns": [
+                {
+                    "match": "\\b(\\w+)\\b",
+                    "captures": {
+                        "1": {
+                            "name": "entity.other.attribute-name.diet"
+                        }
+                    }
+                },
+                {
+                    "begin": "=",
+                    "end": "(?=,|\\))",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "keyword.operator.assignment.diet"
+                        }
+                    },
+                    "patterns": [
+                        {
+                            "name": "constant.language.boolean.diet",
+                            "match": "\\b(false|true)\\b"
+                        },
+                        {
+                            "name": "string.quoted.single.diet",
+                            "match": "(')[^']*(')",
+                            "captures": {
+                                "0": {
+                                    "patterns": [
+                                        {
+                                            "include": "#escaped-char"
+                                        },
+                                        {
+                                            "include": "#string-interpolation"
+                                        }
+                                    ]
+                                },
+                                "1": {
+                                    "name": "punctuation.definition.string.begin.diet"
+                                },
+                                "2": {
+                                    "name": "punctuation.definition.string.end.diet"
+                                }
+                            }
+                        },
+                        {
+                            "name": "string.quoted.double.diet",
+                            "match": "(\")[^\"]+(\")",
+                            "captures": {
+                                "0": {
+                                    "patterns": [
+                                        {
+                                            "include": "#escaped-char"
+                                        },
+                                        {
+                                            "include": "#string-interpolation"
+                                        }
+                                    ]
+                                },
+                                "1": {
+                                    "name": "punctuation.definition.string.begin.diet"
+                                },
+                                "2": {
+                                    "name": "punctuation.definition.string.end.diet"
+                                }
+                            }
+                        },
+                        {
+                            "include": "source.d"
+                        }
+                    ]
+                }
+            ]
+        },
+        "tag-content": {
+            "patterns": [
+                {
+                    "match": "((?:<|>){0,2})(&)?(?:(!?=)(.*))?(.*)",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.operator.whitespace-removal.diet"
+                        },
+                        "2": {
+                            "name": "keyword.operator.i18n.diet"
+                        },
+                        "3": {
+                            "name": "keyword.operator.diet"
+                        },
+                        "4": {
+                            "patterns": [
+                                {
+                                    "include": "source.d"
+                                }
+                            ]
+                        },
+                        "5": {
+                            "patterns": [
+                                {
+                                    "include": "#string-interpolation"
+                                },
+                                {
+                                    "name": "constant.character.diet",
+                                    "match": "&\\w+;"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        "string-interpolation": {
+            "name": "meta.template.expression.diet",
+            "begin": "(?<!\\\\)(?:#|!)\\{",
+            "end": "\\}",
+            "beginCaptures": {
+                "0": {
+                    "name": "punctuation.definition.template-expression.begin.diet"
+                }
+            },
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.definition.template-expression.end.diet"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "source.d"
+                }
+            ]
+        }
+    }
+}
