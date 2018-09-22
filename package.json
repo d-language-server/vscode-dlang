@@ -278,6 +278,16 @@
                         "type": "boolean",
                         "default": true
                     },
+                    "d.init.capabilities.documentRangeFormatting": {
+                        "description": "Enable range formatting",
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "d.init.capabilities.documentOnTypeFormatting": {
+                        "description": "Enable on type formatting",
+                        "type": "boolean",
+                        "default": true
+                    },
                     "d.init.capabilities.rename": {
                         "description": "Enable renaming",
                         "type": "boolean",
