@@ -273,6 +273,11 @@
                         "type": "boolean",
                         "default": true
                     },
+                    "d.init.capabilities.codeAction": {
+                        "description": "Enable code actions",
+                        "type": "boolean",
+                        "default": true
+                    },
                     "d.init.capabilities.documentFormatting": {
                         "description": "Enable formatting",
                         "type": "boolean",
