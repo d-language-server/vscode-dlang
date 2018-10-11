@@ -233,6 +233,11 @@
                         "type": "boolean",
                         "default": true
                     },
+                    "d.init.catchErrors": {
+                        "description": "Catch and ignore errors (WARNING: UNSAFE)",
+                        "type": "boolean",
+                        "default": false
+                    },
                     "d.init.capabilities.hover": {
                         "description": "Enable hover",
                         "type": "boolean",
