@@ -244,6 +244,37 @@
             }
         },
         {
+            "name": "meta.block.assembly.d",
+            "begin": "\\b(asm)(.*)(?!\\s*\\})",
+            "end": "\\}",
+            "beginCaptures": {
+                "1": {
+                    "name": "keyword.control.d"
+                },
+                "2": {
+                    "patterns": [
+                        {
+                            "include": "$self"
+                        }
+                    ]
+                }
+            },
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.section.block.end.d"
+                }
+            },
+            "patterns": [
+                {
+                    "name": "punctuation.section.block.begin.d",
+                    "match": "\\{"
+                },
+                {
+                    "include": "#inline-assembly"
+                }
+            ]
+        },
+        {
             "contentName": "meta.parens.d",
             "begin": "\\b(__traits)\\s*((\\()\\s*(?:(isAbstractClass|isArithmetic|isAssociativeArray|isFinalClass|isPOD|isNested|isFuture|isDeprecated|isFloating|isIntegral|isScalar|isStaticArray|isUnsigned|isDisabled|isVirtualFunction|isVirtualMethod|isAbstractFunction|isFinalFunction|isStaticFunction|isOverrideFunction|isTemplate|isRef|isOut|isLazy|isReturnOnStack|isZeroInit|hasMember|identifier|getAliasThis|getAttributes|getFunctionAttributes|getFunctionVariadicStyle|getLinkage|getMember|getOverloads|getParameterStorageClasses|getPointerBitmap|getProtection|getTargetInfo|getVirtualFunctions|getVirtualMethods|getUnitTests|parent|classInstanceSize|getVirtualIndex|allMembers|derivedMembers|isSame|compiles)|(\\w+)))\\b",
             "end": "\\)",
@@ -285,120 +316,16 @@
             }
         },
         {
-            "name": "comment.line.double-slash.d",
-            "match": "(//).*",
-            "captures": {
-                "1": {
-                    "name": "punctuation.definition.comment.d"
-                }
-            }
+            "include": "#comment-line"
         },
         {
-            "name": "comment.block.d",
-            "begin": "/\\*",
-            "end": "\\*/",
-            "beginCaptures": {
-                "0": {
-                    "name": "punctuation.definition.comment.d"
-                }
-            },
-            "endCaptures": {
-                "0": {
-                    "name": "punctuation.definition.comment.d"
-                }
-            }
-        },
-        {
-            "include": "text.html.javadoc"
+            "include": "#comment-block"
         },
         {
             "include": "#comment-block-nested"
         },
         {
-            "name": "string.quoted.single.d",
-            "match": "(')(?:[^\\\\]|(?:\\\\([^']{1,10}|')))(')",
-            "captures": {
-                "0": {
-                    "patterns": [
-                        {
-                            "include": "#string-escaped-char"
-                        }
-                    ]
-                },
-                "1": {
-                    "name": "punctuation.definition.string.begin.d"
-                },
-                "2": {
-                    "name": "punctuation.definition.string.end.d"
-                }
-            }
-        },
-        {
-            "name": "string.quoted.double.delimited.d",
-            "begin": "q\"\\[",
-            "end": "\\]\""
-        },
-        {
-            "name": "string.quoted.double.delimited.d",
-            "begin": "q\"\\(",
-            "end": "\\)\""
-        },
-        {
-            "name": "string.quoted.double.delimited.d",
-            "begin": "q\"<",
-            "end": ">\""
-        },
-        {
-            "name": "string.quoted.double.delimited.d",
-            "begin": "q\"\\{",
-            "end": "\\}\""
-        },
-        {
-            "name": "string.quoted.double.delimited.d",
-            "begin": "q\"(\\w+)$",
-            "end": "^\\s*\\1\""
-        },
-        {
-            "name": "string.quoted.double.hex.d",
-            "contentName": "invalid.deprecated.hex.d",
-            "begin": "x\"",
-            "end": "\"(c|d|w)?",
-            "patterns": [
-                {
-                    "name": "invalid.illegal.non-hex-char.d",
-                    "match": "[^\\s\\da-fA-F]"
-                }
-            ]
-        },
-        {
-            "name": "string.quoted.double.raw.d",
-            "begin": "r\"",
-            "end": "\"(c|d|w)?"
-        },
-        {
-            "name": "string.quoted.double.d",
-            "begin": "\"",
-            "end": "\"(c|d|w)?",
-            "patterns": [
-                {
-                    "include": "#string-escaped-char"
-                }
-            ]
-        },
-        {
-            "name": "string.quoted.other.backtick.raw.d",
-            "begin": "`",
-            "end": "`(c|d|w)?"
-        },
-        {
-            "name": "string.unquoted.token.d",
-            "begin": "q{",
-            "end": "}",
-            "patterns": [
-                {
-                    "include": "$self"
-                }
-            ]
+            "include": "#string-literal"
         },
         {
             "name": "constant.language.boolean.d",
@@ -413,24 +340,11 @@
             "match": "\\b__(FILE|FILE_FULL_PATH|MODULE|LINE|FUNCTION|PRETTY_FUNCTION)__\\b"
         },
         {
-            "name": "constant.numeric.hex.d",
-            "match": "\\b0[xX][\\da-fA-F_]+\\.[\\da-fA-F_]+([pP][+-]?\\d[\\d_]*)?i?\\b"
-        },
-        {
-            "name": "constant.numeric.hex.d",
-            "match": "\\b0[xX][\\da-fA-F_]+([pP][+-]?\\d[\\d_]*)?i?\\b"
-        },
-        {
             "name": "constant.numeric.float.d",
             "match": "\\b\\d[\\d_]*\\.\\d[\\d_]*([eE][+-]?\\d[\\d_]*)?[fFL]?i?\\b"
         },
         {
-            "name": "constant.numeric.integer.d",
-            "match": "\\b\\d[\\d_]*([eE][+-]?\\d[\\d_]*)?(L?[uU]?|[uU]L)?i?\\b"
-        },
-        {
-            "name": "constant.numeric.integer.binary.d",
-            "match": "\\b0[bB][01_]+i?\\b"
+            "include": "#integer-literal"
         },
         {
             "name": "storage.type.function.arrow.d",
@@ -461,36 +375,7 @@
             "match": "\\b(asm|body|debug|invariant|return|synchronized|unittest|with)\\b"
         },
         {
-            "name": "keyword.operator.arithmetic.d",
-            "match": "\\+|-|\\*|/|~|\\^|\\^\\^"
-        },
-        {
-            "name": "keyword.operator.assignment.d",
-            "match": "(?:\\+|-|\\*|/|~|\\^|\\^\\^)?="
-        },
-        {
-            "name": "keyword.operator.comparison.d",
-            "match": "==|!=|(<|>)=?|<>"
-        },
-        {
-            "name": "keyword.operator.logical.d",
-            "match": "!|&&|\\|\\|"
-        },
-        {
-            "name": "keyword.operator.bitwise.d",
-            "match": "&|\\|"
-        },
-        {
-            "name": "keyword.operator.ternary.d",
-            "match": "\\?|:"
-        },
-        {
-            "name": "keyword.operator.variadic.d",
-            "match": "\\.\\.\\."
-        },
-        {
-            "name": "keyword.operator.slice.d",
-            "match": "\\.\\."
+            "include": "#operator"
         },
         {
             "name": "punctuation.accessor.d",
@@ -737,6 +622,30 @@
                 }
             ]
         },
+        "comment-line": {
+            "name": "comment.line.double-slash.d",
+            "match": "(//).*",
+            "captures": {
+                "1": {
+                    "name": "punctuation.definition.comment.d"
+                }
+            }
+        },
+        "comment-block": {
+            "name": "comment.block.d",
+            "begin": "/\\*",
+            "end": "\\*/",
+            "beginCaptures": {
+                "0": {
+                    "name": "punctuation.definition.comment.d"
+                }
+            },
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.definition.comment.d"
+                }
+            }
+        },
         "comment-block-nested": {
             "name": "comment.block.nested.d",
             "begin": "/\\+",
@@ -757,13 +666,221 @@
                 }
             ]
         },
+        "string-literal": {
+            "patterns": [
+                {
+                    "name": "string.quoted.single.d",
+                    "match": "(')(?:[^\\\\]|(?:\\\\([^']{1,10}|')))(')",
+                    "captures": {
+                        "0": {
+                            "patterns": [
+                                {
+                                    "include": "#string-escaped-char"
+                                }
+                            ]
+                        },
+                        "1": {
+                            "name": "punctuation.definition.string.begin.d"
+                        },
+                        "2": {
+                            "name": "punctuation.definition.string.end.d"
+                        }
+                    }
+                },
+                {
+                    "name": "string.quoted.double.delimited.d",
+                    "begin": "q\"\\[",
+                    "end": "\\]\""
+                },
+                {
+                    "name": "string.quoted.double.delimited.d",
+                    "begin": "q\"\\(",
+                    "end": "\\)\""
+                },
+                {
+                    "name": "string.quoted.double.delimited.d",
+                    "begin": "q\"<",
+                    "end": ">\""
+                },
+                {
+                    "name": "string.quoted.double.delimited.d",
+                    "begin": "q\"\\{",
+                    "end": "\\}\""
+                },
+                {
+                    "name": "string.quoted.double.delimited.d",
+                    "begin": "q\"(\\w+)$",
+                    "end": "^\\s*\\1\""
+                },
+                {
+                    "name": "string.quoted.double.hex.d",
+                    "contentName": "invalid.deprecated.hex.d",
+                    "begin": "x\"",
+                    "end": "\"(c|d|w)?",
+                    "patterns": [
+                        {
+                            "name": "invalid.illegal.non-hex-char.d",
+                            "match": "[^\\s\\da-fA-F]"
+                        }
+                    ]
+                },
+                {
+                    "name": "string.quoted.double.raw.d",
+                    "begin": "r\"",
+                    "end": "\"(c|d|w)?"
+                },
+                {
+                    "name": "string.quoted.double.d",
+                    "begin": "\"",
+                    "end": "\"(c|d|w)?",
+                    "patterns": [
+                        {
+                            "include": "#string-escaped-char"
+                        }
+                    ]
+                },
+                {
+                    "name": "string.quoted.other.backtick.raw.d",
+                    "begin": "`",
+                    "end": "`(c|d|w)?"
+                },
+                {
+                    "name": "string.unquoted.token.d",
+                    "begin": "q{",
+                    "end": "}",
+                    "patterns": [
+                        {
+                            "include": "$self"
+                        }
+                    ]
+                }
+            ]
+        },
+        "integer-literal": {
+            "patterns": [
+                {
+                    "name": "constant.numeric.hex.d",
+                    "match": "\\b0[xX][\\da-fA-F_]+\\.[\\da-fA-F_]+([pP][+-]?\\d[\\d_]*)?i?\\b"
+                },
+                {
+                    "name": "constant.numeric.hex.d",
+                    "match": "\\b0[xX][\\da-fA-F_]+([pP][+-]?\\d[\\d_]*)?i?\\b"
+                },
+                {
+                    "name": "constant.numeric.integer.d",
+                    "match": "\\b\\d[\\d_]*([eE][+-]?\\d[\\d_]*)?(L?[uU]?|[uU]L)?i?\\b"
+                },
+                {
+                    "name": "constant.numeric.integer.binary.d",
+                    "match": "\\b0[bB][01_]+i?\\b"
+                }
+            ]
+        },
         "string-escaped-char": {
             "name": "constant.character.escape.d",
             "match": "\\\\(['\"?\\\\0abnfrtv]|x[\\da-fA-F]{2}|[0-3]?[0-7]{1,2}|u[\\da-fA-F]{4}|U[\\da-fA-F]{8}|&[a-zA-Z]{1,8};)"
         },
+        "operator": {
+            "patterns": [
+                {
+                    "name": "keyword.operator.arithmetic.d",
+                    "match": "\\+|-|\\*|/|~|\\^|\\^\\^"
+                },
+                {
+                    "name": "keyword.operator.assignment.d",
+                    "match": "(?:\\+|-|\\*|/|~|\\^|\\^\\^)?="
+                },
+                {
+                    "name": "keyword.operator.shift.d",
+                    "match": "<<|>>>?"
+                },
+                {
+                    "name": "keyword.operator.comparison.d",
+                    "match": "==|!=|(<|>)=?|<>"
+                },
+                {
+                    "name": "keyword.operator.logical.d",
+                    "match": "!|&&|\\|\\|"
+                },
+                {
+                    "name": "keyword.operator.bitwise.d",
+                    "match": "&|\\|"
+                },
+                {
+                    "name": "keyword.operator.ternary.d",
+                    "match": "\\?|:"
+                },
+                {
+                    "name": "keyword.operator.variadic.d",
+                    "match": "\\.\\.\\."
+                },
+                {
+                    "name": "keyword.operator.slice.d",
+                    "match": "\\.\\."
+                }
+            ]
+        },
         "functions-support": {
             "name": "support.function.d",
             "match": "\\b(destroy|factory|opAssign|opBinary|opBinaryRight|opCall|opCmp|opDispatch|opDollar|opEquals|opIndex|opIndexAssign|opIndexOpAssign|opIndexUnary|opOpAssign|opSlice|opUnary|toHash|toString)\\b"
+        },
+        "inline-assembly": {
+            "patterns": [
+                {
+                    "name": "keyword.other.d.asm",
+                    "match": "\\b(align|even|naked|offsetof|seg)\\b"
+                },
+                {
+                    "name": "storage.type.d.asm",
+                    "match": "\\b(near|far|byte|short|int|word|dword|qword|float|double|real)\\s+ptr\\b"
+                },
+                {
+                    "name": "variable.language.register.d.asm",
+                    "match": "\\bST\\([0-7]\\)"
+                },
+                {
+                    "name": "variable.language.register.d.asm",
+                    "match": "\\b(AL|AH|AX|EAX|BL|BH|BX|EBX|CL|CH|CX|ECX|DL|DH|DX|EDX|BP|EBP|SP|ESP|DI|EDI|SI|ESI|ES|CS|SS|DS|GS|FS|CR[02-4]|DR[0-367]|TR[3-7]|ST|MM[0-7]|(X|Y)MM([0-9]|1[0-5])|RAX|RBX|RCX|RDX|BPL|RBP|SPL|RSP|DIL|RDI|SIL|RSI|R([89]|1[0-5])(B|W|D)?)\\b"
+                },
+                {
+                    "name": "variable.language.d.asm",
+                    "match": "\\b(this|__LOCAL_SIZE|\\$)\\b"
+                },
+                {
+                    "name": "entity.name.function.d.asm",
+                    "match": "\\b(aaa|aad|aam|aas|adc|add|addpd|addps|addsd|addss|and|andnpd|andnps|andpd|andps|arpl|bound|bsf|bsr|bswap|bt|btc|btr|bts|call|cbw|cdq|clc|cld|clflush|cli|clts|cmc|cmova|cmovae|cmovb|cmovbe|cmovc|cmove|cmovg|cmovge|cmovl|cmovle|cmovna|cmovnae|cmovnb|cmovnbe|cmovnc|cmovne|cmovng|cmovnge|cmovnl|cmovnle|cmovno|cmovnp|cmovns|cmovnz|cmovo|cmovp|cmovpe|cmovpo|cmovs|cmovz|cmp|cmppd|cmpps|cmps|cmpsb|cmpsd|cmpss|cmpsw|cmpxchg|cmpxchg8b|cmpxchg16b|comisd|comiss|cpuid|cvtdq2pd|cvtdq2ps|cvtpd2dq|cvtpd2pi|cvtpd2ps|cvtpi2pd|cvtpi2ps|cvtps2dq|cvtps2pd|cvtps2pi|cvtsd2si|cvtsd2ss|cvtsi2sd|cvtsi2ss|cvtss2sd|cvtss2si|cvttpd2dq|cvttpd2pi|cvttps2dq|cvttps2pi|cvttsd2si|cvttss2si|cwd|cwde|da|daa|das|db|dd|de|dec|df|di|div|divpd|divps|divsd|divss|dl|dq|ds|dt|dw|emms|enter|f2xm1|fabs|fadd|faddp|fbld|fbstp|fchs|fclex|fcmovb|fcmovbe|fcmove|fcmovnb|fcmovnbe|fcmovne|fcmovnu|fcmovu|fcom|fcomi|fcomip|fcomp|fcompp|fcos|fdecstp|fdisi|fdiv|fdivp|fdivr|fdivrp|feni|ffree|fiadd|ficom|ficomp|fidiv|fidivr|fild|fimul|fincstp|finit|fist|fistp|fisub|fisubr|fld|fld1|fldcw|fldenv|fldl2e|fldl2t|fldlg2|fldln2|fldpi|fldz|fmul|fmulp|fnclex|fndisi|fneni|fninit|fnop|fnsave|fnstcw|fnstenv|fnstsw|fpatan|fprem|fprem1|fptan|frndint|frstor|fsave|fscale|fsetpm|fsin|fsincos|fsqrt|fst|fstcw|fstenv|fstp|fstsw|fsub|fsubp|fsubr|fsubrp|ftst|fucom|fucomi|fucomip|fucomp|fucompp|fwait|fxam|fxch|fxrstor|fxsave|fxtract|fyl2x|fyl2xp1|hlt|idiv|imul|in|inc|ins|insb|insd|insw|int|into|invd|invlpg|iret|iretd|iretq|ja|jae|jb|jbe|jc|jcxz|je|jecxz|jg|jge|jl|jle|jmp|jna|jnae|jnb|jnbe|jnc|jne|jng|jnge|jnl|jnle|jno|jnp|jns|jnz|jo|jp|jpe|jpo|js|jz|lahf|lar|ldmxcsr|lds|lea|leave|les|lfence|lfs|lgdt|lgs|lidt|lldt|lmsw|lock|lods|lodsb|lodsd|lodsw|loop|loope|loopne|loopnz|loopz|lsl|lss|ltr|maskmovdqu|maskmovq|maxpd|maxps|maxsd|maxss|mfence|minpd|minps|minsd|minss|mov|movapd|movaps|movd|movdq2q|movdqa|movdqu|movhlps|movhpd|movhps|movlhps|movlpd|movlps|movmskpd|movmskps|movntdq|movnti|movntpd|movntps|movntq|movq|movq2dq|movs|movsb|movsd|movss|movsw|movsx|movupd|movups|movzx|mul|mulpd|mulps|mulsd|mulss|neg|nop|not|or|orpd|orps|out|outs|outsb|outsd|outsw|packssdw|packsswb|packuswb|paddb|paddd|paddq|paddsb|paddsw|paddusb|paddusw|paddw|pand|pandn|pavgb|pavgw|pcmpeqb|pcmpeqd|pcmpeqw|pcmpgtb|pcmpgtd|pcmpgtw|pextrw|pinsrw|pmaddwd|pmaxsw|pmaxub|pminsw|pminub|pmovmskb|pmulhuw|pmulhw|pmullw|pmuludq|pop|popa|popad|popf|popfd|por|prefetchnta|prefetcht0|prefetcht1|prefetcht2|psadbw|pshufd|pshufhw|pshuflw|pshufw|pslld|pslldq|psllq|psllw|psrad|psraw|psrld|psrldq|psrlq|psrlw|psubb|psubd|psubq|psubsb|psubsw|psubusb|psubusw|psubw|punpckhbw|punpckhdq|punpckhqdq|punpckhwd|punpcklbw|punpckldq|punpcklqdq|punpcklwd|push|pusha|pushad|pushf|pushfd|pxor|rcl|rcpps|rcpss|rcr|rdmsr|rdpmc|rdtsc|rep|repe|repne|repnz|repz|ret|retf|rol|ror|rsm|rsqrtps|rsqrtss|sahf|sal|sar|sbb|scas|scasb|scasd|scasw|seta|setae|setb|setbe|setc|sete|setg|setge|setl|setle|setna|setnae|setnb|setnbe|setnc|setne|setng|setnge|setnl|setnle|setno|setnp|setns|setnz|seto|setp|setpe|setpo|sets|setz|sfence|sgdt|shl|shld|shr|shrd|shufpd|shufps|sidt|sldt|smsw|sqrtpd|sqrtps|sqrtsd|sqrtss|stc|std|sti|stmxcsr|stos|stosb|stosd|stosw|str|sub|subpd|subps|subsd|subss|syscall|sysenter|sysexit|sysret|test|ucomisd|ucomiss|ud2|unpckhpd|unpckhps|unpcklpd|unpcklps|verr|verw|wait|wbinvd|wrmsr|xadd|xchg|xlat|xlatb|xor|xorpd|xorps)\\b"
+                },
+                {
+                    "name": "entity.name.function.d.asm",
+                    "match": "\\b(addsubpd|addsubps|fisttp|haddpd|haddps|hsubpd|hsubps|lddqu|monitor|movddup|movshdup|movsldup|mwait)\\b"
+                },
+                {
+                    "name": "entity.name.function.d.asm",
+                    "match": "\\b(pavgusb|pf2id|pfacc|pfadd|pfcmpeq|pfcmpge|pfcmpgt|pfmax|pfmin|pfmul|pfnacc|pfpnacc|pfrcp|pfrcpit1|pfrcpit2|pfrsqit1|pfrsqrt|pfsub|pfsubr|pi2fd|pmulhrw|pswapd)\\b"
+                },
+                {
+                    "include": "#string-literal"
+                },
+                {
+                    "include": "#integer-literal"
+                },
+                {
+                    "include": "#comment-line"
+                },
+                {
+                    "include": "#comment-block"
+                },
+                {
+                    "include": "#comment-block-nested"
+                },
+                {
+                    "include": "#operator"
+                },
+                {
+                    "name": "punctuation.terminator.d.asm",
+                    "match": ";"
+                }
+            ]
         },
         ".util-count-braces": {
             "name": "meta.block.d",
