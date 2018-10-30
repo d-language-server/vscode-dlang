@@ -10,7 +10,7 @@
             "match": "\\b(module)\\s+([^;]+)",
             "captures": {
                 "1": {
-                    "name": "storage.type.d"
+                    "name": "storage.type.module.d"
                 },
                 "2": {
                     "name": "entity.name.namespace.d"
@@ -32,7 +32,7 @@
             ]
         },
         {
-            "begin": "\\b(?:(static|public)\\s+)?(import)\\b",
+            "begin": "\\b(?:(static|public)\\s+)?(import)\\b(?!\\s*\\})",
             "end": ";",
             "beginCaptures": {
                 "1": {
@@ -44,6 +44,11 @@
                 },
                 "2": {
                     "name": "keyword.control.import.d"
+                }
+            },
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.terminator.d"
                 }
             },
             "patterns": [
@@ -71,7 +76,7 @@
                     "patterns": [
                         {
                             "name": "support.constant.pragma.d",
-                            "match": "\\b(inline|lib|mangle|msg|startaddress)\\b"
+                            "match": "\\b(inline|lib|linkerDirective|mangle|msg|startaddress)\\b"
                         }
                     ]
                 }
@@ -98,7 +103,7 @@
                     "patterns": [
                         {
                             "name": "support.constant.version.d",
-                            "match": "\\b(?:DigitalMars|GNU|LDC|SDC|Windows|Win32|Win64|linux|OSX|FreeBSD|OpenBSD|NetBSD|DragonFlyBSD|BSD|Solaris|Posix|AIX|Haiku|SkyOS|SysV3|SysV4|Hurd|Android|Playstation|Playstation4|Cygwin|MinGW|FreeStanding|CRuntime_Bionic|CRuntime_DigitalMars|CRuntime_Glibc|CRuntime_Microsoft|CRuntime_Musl|CRuntime_UClibc|X86|X86_64|ARM|ARM_Thumb|ARM_SoftFloat|ARM_SoftFP|ARM_HardFloat|AArch64|Epiphany|PPC|PPC_SoftFloat|PPC_HardFloat|PPC64|IA64|MIPS32|MIPS64|MIPS_O32|MIPS_N32|MIPS_O64|MIPS_N64|MIPS_EABI|MIPS_SoftFloat|MIPS_HardFloat|NVPTX|NVPTX64|RISCV32|RISCV64|SPARC|SPARC_V8Plus|SPARC_SoftFloat|SPARC_HardFloat|SPARC64|S390|SystemZ|HPPA|HPPA64|SH|Alpha|Alpha_SoftFloat|Alpha_HardFloat|LittleEndian|BigEndian|ELFv1|ELFv2|D_Coverage|D_Ddoc|D_InlineAsm_X86|D_InlineAsm_X86_64|D_LP64|D_X32|D_HardFloat|D_SoftFloat|D_PIC|D_SIMD|D_AVX|D_AVX2|D_Version2|D_NoBoundsChecks|D_ObjectiveC|unittest|assert|none|all)\\b"
+                            "match": "\\b(?:DigitalMars|GNU|LDC|SDC|Windows|Win32|Win64|linux|OSX|FreeBSD|OpenBSD|NetBSD|DragonFlyBSD|BSD|Solaris|Posix|AIX|Haiku|SkyOS|SysV3|SysV4|Hurd|Android|Emscripten|PlayStation|PlayStation4|Cygwin|MinGW|FreeStanding|CRuntime_Bionic|CRuntime_DigitalMars|CRuntime_Glibc|CRuntime_Microsoft|CRuntime_Musl|CRuntime_UClibc|CppRuntime_Clang|CppRuntime_DigitalMars|CppRuntime_Gcc|CppRuntime_Microsoft|CppRuntime_Sun|X86|X86_64|ARM|ARM_Thumb|ARM_SoftFloat|ARM_SoftFP|ARM_HardFloat|AArch64|AsmJS|Epiphany|PPC|PPC_SoftFloat|PPC_HardFloat|PPC64|IA64|MIPS32|MIPS64|MIPS_O32|MIPS_N32|MIPS_O64|MIPS_N64|MIPS_EABI|MIPS_SoftFloat|MIPS_HardFloat|NVPTX|NVPTX64|RISCV32|RISCV64|SPARC|SPARC_V8Plus|SPARC_SoftFloat|SPARC_HardFloat|SPARC64|S390|SystemZ|HPPA|HPPA64|SH|WebAssembly|Alpha|Alpha_SoftFloat|Alpha_HardFloat|LittleEndian|BigEndian|ELFv1|ELFv2|D_BetterC|D_Exceptions|D_ModuleInfo|D_TypeInfo|D_Coverage|D_Ddoc|D_InlineAsm_X86|D_InlineAsm_X86_64|D_LP64|D_X32|D_HardFloat|D_SoftFloat|D_PIC|D_SIMD|D_AVX|D_AVX2|D_Version2|D_NoBoundsChecks|D_ObjectiveC|Core|Std|unittest|assert|none|all)\\b"
                         },
                         {
                             "name": "invalid.deprecated.version.d",
@@ -240,7 +245,7 @@
         },
         {
             "contentName": "meta.parens.d",
-            "begin": "\\b(__traits)\\s*((\\()\\s*(?:(isAbstractClass|isArithmetic|isAssociativeArray|isFinalClass|isPOD|isNested|isFuture|isDeprecated|isFloating|isIntegral|isScalar|isStaticArray|isUnsigned|isDisabled|isVirtualFunction|isVirtualMethod|isAbstractFunction|isFinalFunction|isStaticFunction|isOverrideFunction|isTemplate|isRef|isOut|isLazy|isReturnOnStack|hasMember|identifier|getAliasThis|getAttributes|getFunctionAttributes|getFunctionVariadicStyle|getLinkage|getMember|getOverloads|getParameterStorageClasses|getPointerBitmap|getProtection|getVirtualFunctions|getVirtualMethods|getUnitTests|parent|classInstanceSize|getVirtualIndex|allMembers|derivedMembers|isSame|compiles)|(\\w+)))\\b",
+            "begin": "\\b(__traits)\\s*((\\()\\s*(?:(isAbstractClass|isArithmetic|isAssociativeArray|isFinalClass|isPOD|isNested|isFuture|isDeprecated|isFloating|isIntegral|isScalar|isStaticArray|isUnsigned|isDisabled|isVirtualFunction|isVirtualMethod|isAbstractFunction|isFinalFunction|isStaticFunction|isOverrideFunction|isTemplate|isRef|isOut|isLazy|isReturnOnStack|isZeroInit|hasMember|identifier|getAliasThis|getAttributes|getFunctionAttributes|getFunctionVariadicStyle|getLinkage|getMember|getOverloads|getParameterStorageClasses|getPointerBitmap|getProtection|getTargetInfo|getVirtualFunctions|getVirtualMethods|getUnitTests|parent|classInstanceSize|getVirtualIndex|allMembers|derivedMembers|isSame|compiles)|(\\w+)))\\b",
             "end": "\\)",
             "beginCaptures": {
                 "1": {
@@ -444,6 +449,10 @@
             "match": "\\b(catch|finally|throw|try)\\b"
         },
         {
+            "name": "keyword.control.import.d",
+            "match": "\\bimport\\b"
+        },
+        {
             "name": "keyword.control.loop.d",
             "match": "\\b(do|for|foreach(_reverse)?|while)\\b"
         },
@@ -489,7 +498,7 @@
         },
         {
             "name": "keyword.other.d",
-            "match": "\\b(assert|cast|deprecated|in|is|macro|mixin|new|out|typeid|typeof)\\b"
+            "match": "\\b(assert|cast|in|is|macro|mixin|new|out|pragma|typeid|typeof|__traits)\\b"
         },
         {
             "name": "storage.modifier.attribute.d",
@@ -533,7 +542,7 @@
         },
         {
             "name": "storage.modifier.d",
-            "match": "\\b(abstract|alias|align|auto|const|extern|final|immutable|inout|lazy|nothrow|override|pure|ref|scope|shared|static|volatile|__gshared)\\b"
+            "match": "\\b(abstract|alias|align|auto|const|deprecated|extern|final|immutable|inout|lazy|nothrow|override|pure|ref|scope|shared|static|volatile|__gshared)\\b"
         },
         {
             "name": "storage.type.character.d",
@@ -553,7 +562,7 @@
         },
         {
             "name": "storage.type.d",
-            "match": "\\b(bool|class|delegate|enum|function|interface|struct|template|union|void|__vector)\\b"
+            "match": "\\b(bool|class|delegate|enum|function|interface|module|struct|template|union|void|__vector)\\b"
         },
         {
             "name": "invalid.deprecated.d",
@@ -597,7 +606,7 @@
             }
         },
         {
-            "match": "(?<=[^.]\\.)\\s*(?:(alignof|assumeSafeAppend|capacity|classinfo|clear|dig|dup|epsilon|hashOf|idup|im|infinity|init|keys|mangleof|mant_dig|max|max(?:_10)?_exp|min|min(?:_10)?_exp|min_normal|nan|ptr|re|rehash|reserve|sizeof|stringof|values)|([a-zA-Z_]\\w*))\\b",
+            "match": "(?<=[^.]\\.)\\s*(?:(alignof|assumeSafeAppend|capacity|classinfo|clear|dig|dup|epsilon|hashOf|idup|im|infinity|init|keys|mangleof|mant_dig|max|max(?:_10)?_exp|min|min(?:_10)?_exp|min_normal|nan|offsetof|ptr|re|rehash|reserve|sizeof|stringof|tupleof|values|__vptr|__monitor)|([a-zA-Z_]\\w*))\\b",
             "captures": {
                 "1": {
                     "name": "support.constant.property.d"
