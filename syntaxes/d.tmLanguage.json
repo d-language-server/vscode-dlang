@@ -244,8 +244,7 @@
             }
         },
         {
-            "name": "meta.block.assembly.d",
-            "begin": "\\b(asm)(.*)(?!\\s*\\})",
+            "begin": "\\b(asm)(?!\\s*\\})([^\\{]*)",
             "end": "\\}",
             "beginCaptures": {
                 "1": {
