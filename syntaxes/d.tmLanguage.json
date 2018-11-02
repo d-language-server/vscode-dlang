@@ -350,12 +350,20 @@
             "match": "=>"
         },
         {
+            "match": "^\\s*\\b(body|do|in|out)\\b(?=\\s*($|\\{|\\())",
+            "captures": {
+                "0": {
+                    "name": "keyword.control.d"
+                }
+            }
+        },
+        {
             "name": "keyword.control.branch.d",
             "match": "\\b(break|case|continue|default|goto|switch|version)\\b"
         },
         {
             "name": "keyword.control.conditional.d",
-            "match": "\\b(else|if)\\b"
+            "match": "\\b(else|(static\\s+)?if)\\b"
         },
         {
             "name": "keyword.control.exception.d",
@@ -371,7 +379,11 @@
         },
         {
             "name": "keyword.control.d",
-            "match": "\\b(asm|body|debug|invariant|return|synchronized|unittest|with)\\b"
+            "match": "\\b(asm|debug|invariant|return|synchronized|unittest|with)\\b"
+        },
+        {
+            "name": "keyword.other.d",
+            "match": "\\b(assert|cast|in|is|macro|mixin|new|out|pragma|typeid|typeof|__traits)\\b"
         },
         {
             "include": "#operator"
@@ -379,10 +391,6 @@
         {
             "name": "punctuation.accessor.d",
             "match": "\\."
-        },
-        {
-            "name": "keyword.other.d",
-            "match": "\\b(assert|cast|in|is|macro|mixin|new|out|pragma|typeid|typeof|__traits)\\b"
         },
         {
             "name": "storage.modifier.attribute.d",
@@ -479,7 +487,7 @@
             "match": "\\b(Error|Exception|Interface|Object|OffsetTypeInfo|RTInfo|Throwable|TypeInfo|TypeInfo_Class)\\b"
         },
         {
-            "match": "\\b([a-z_]\\w*)\\s*(!)(?!=|is\\b|in\\b)",
+            "match": "\\b([a-z_]\\w*)\\s*(!)(?!in\\b|is\\b|=)",
             "captures": {
                 "1": {
                     "name": "entity.name.function.d",
