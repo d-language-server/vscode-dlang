@@ -421,6 +421,24 @@
             }
         },
         {
+            "contentName": "entity.name.namespace.d",
+            "begin": "\\b(package)\\s*(\\()",
+            "end": "\\)",
+            "beginCaptures": {
+                "1": {
+                    "name": "storage.modifier.visibility.d"
+                },
+                "2": {
+                    "name": "punctuation.section.parens.begin.d"
+                }
+            },
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.section.parens.end.d"
+                }
+            }
+        },
+        {
             "name": "storage.modifier.visibility.d",
             "match": "\\b(export|package|private|protected|public)\\b"
         },
