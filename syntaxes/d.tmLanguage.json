@@ -336,7 +336,7 @@
         },
         {
             "name": "constant.language.d",
-            "match": "\\b__(FILE|FILE_FULL_PATH|MODULE|LINE|FUNCTION|PRETTY_FUNCTION)__\\b"
+            "match": "\\b__(DATE|EOF|TIME|TIMESTAMP|VENDOR|VERSION)__\\b"
         },
         {
             "name": "constant.numeric.float.d",
@@ -384,6 +384,10 @@
         {
             "name": "keyword.other.d",
             "match": "\\b(assert|cast|in|is|macro|mixin|new|out|pragma|typeid|typeof|__traits)\\b"
+        },
+        {
+            "name": "keyword.other.special.d",
+            "match": "\\b__(FILE|FILE_FULL_PATH|MODULE|LINE|FUNCTION|PRETTY_FUNCTION)__\\b"
         },
         {
             "include": "#operator"
