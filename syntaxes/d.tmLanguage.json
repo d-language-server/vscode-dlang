@@ -356,7 +356,7 @@
         },
         {
             "name": "comment.line.special.d",
-            "match": "#line\\s+(\\S+)\\s+(\"[^\"]+\")\\s*$",
+            "match": "#line\\s+(\\S+)\\s+(\"[^\"]*\")\\s*$",
             "captures": {
                 "1": {
                     "name": "constant.numeric.integer.d"
@@ -591,6 +591,10 @@
         {
             "name": "entity.name.type.d",
             "match": "\\b[A-Z]\\w*\\b"
+        },
+        {
+            "name": "punctuation.separator.d",
+            "match": ","
         },
         {
             "name": "punctuation.terminator.d",
@@ -907,11 +911,15 @@
             },
             "patterns": [
                 {
-                    "include": "$self"
-                },
-                {
                     "name": "keyword.operator.length.d",
                     "match": "\\$"
+                },
+                {
+                    "name": "punctuation.separator.d",
+                    "match": ":"
+                },
+                {
+                    "include": "$self"
                 }
             ]
         },
@@ -930,6 +938,10 @@
                 }
             },
             "patterns": [
+                {
+                    "name": "punctuation.separator.d",
+                    "match": ";"
+                },
                 {
                     "include": "$self"
                 }
