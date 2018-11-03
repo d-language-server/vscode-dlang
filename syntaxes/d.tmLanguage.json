@@ -352,7 +352,7 @@
         {
             "match": "^\\s*\\b(body|do|in|out)\\b(?=\\s*($|\\{|\\())",
             "captures": {
-                "0": {
+                "1": {
                     "name": "keyword.control.d"
                 }
             }
