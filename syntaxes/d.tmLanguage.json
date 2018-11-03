@@ -551,7 +551,7 @@
                     "name": "entity.name.function.d",
                     "patterns": [
                         {
-                            "include": "#functions-support"
+                            "include": "#function-support"
                         }
                     ]
                 },
@@ -567,7 +567,7 @@
                     "name": "entity.name.function.d",
                     "patterns": [
                         {
-                            "include": "#functions-support"
+                            "include": "#function-support"
                         }
                     ]
                 }
@@ -716,7 +716,7 @@
                     "end": "\"(c|d|w)?",
                     "patterns": [
                         {
-                            "name": "invalid.illegal.non-hex-char.d",
+                            "name": "invalid.illegal.d",
                             "match": "[^\\s\\da-fA-F]"
                         }
                     ]
@@ -753,6 +753,10 @@
                 }
             ]
         },
+        "string-escaped-char": {
+            "name": "constant.character.escape.d",
+            "match": "\\\\(['\"?\\\\0abnfrtv]|x[\\da-fA-F]{2}|[0-3]?[0-7]{1,2}|u[\\da-fA-F]{4}|U[\\da-fA-F]{8}|&[a-zA-Z]{1,8};)"
+        },
         "integer-literal": {
             "patterns": [
                 {
@@ -769,10 +773,6 @@
                 }
             ]
         },
-        "string-escaped-char": {
-            "name": "constant.character.escape.d",
-            "match": "\\\\(['\"?\\\\0abnfrtv]|x[\\da-fA-F]{2}|[0-3]?[0-7]{1,2}|u[\\da-fA-F]{4}|U[\\da-fA-F]{8}|&[a-zA-Z]{1,8};)"
-        },
         "operator": {
             "patterns": [
                 {
@@ -781,7 +781,7 @@
                 },
                 {
                     "name": "keyword.operator.assignment.d",
-                    "match": "(?:\\+|-|\\*|/|~|\\^|\\^\\^)?="
+                    "match": "(\\+|-|\\*|/|~|\\^|\\^\\^)?="
                 },
                 {
                     "name": "keyword.operator.shift.d",
@@ -813,7 +813,7 @@
                 }
             ]
         },
-        "functions-support": {
+        "function-support": {
             "name": "support.function.d",
             "match": "\\b(destroy|factory|opAssign|opBinary|opBinaryRight|opCall|opCmp|opDispatch|opDollar|opEquals|opIndex|opIndexAssign|opIndexOpAssign|opIndexUnary|opOpAssign|opSlice|opUnary|toHash|toString)\\b"
         },
