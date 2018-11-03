@@ -327,6 +327,18 @@
             "include": "#string-literal"
         },
         {
+            "name": "comment.line.special.d",
+            "match": "#line\\s+(\\S+)\\s+(\"[^\"]+\")\\s*$",
+            "captures": {
+                "1": {
+                    "name": "constant.numeric.integer.d"
+                },
+                "2": {
+                    "name": "string.quoted.double.d"
+                }
+            }
+        },
+        {
             "name": "constant.language.boolean.d",
             "match": "\\b(true|false)\\b"
         },
