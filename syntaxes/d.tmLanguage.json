@@ -35,17 +35,10 @@
             ]
         },
         {
-            "begin": "\\b(?:(static|public)\\s+)?(import)\\b(?!\\s*\\})",
+            "begin": "\\b(import)\\b(?!\\s*\\})",
             "end": ";",
             "beginCaptures": {
                 "1": {
-                    "patterns": [
-                        {
-                            "include": "$self"
-                        }
-                    ]
-                },
-                "2": {
                     "name": "keyword.control.import.d"
                 }
             },
@@ -56,10 +49,27 @@
             },
             "patterns": [
                 {
-                    "include": "#import-bindings"
+                    "name": "keyword.operator.assignment.d",
+                    "match": "="
                 },
                 {
-                    "include": "#import-aliases"
+                    "name": "punctuation.accessor.d",
+                    "match": ":"
+                },
+                {
+                    "name": "punctuation.separator.d",
+                    "match": ","
+                },
+                {
+                    "include": "#import-support"
+                },
+                {
+                    "name": "entity.name.namespace.d",
+                    "match": "\\b\\w+\\.[\\w.]+\\b"
+                },
+                {
+                    "name": "entity.name.d",
+                    "match": "\\b[\\w.]+\\b"
                 }
             ]
         },
@@ -576,101 +586,11 @@
         }
     ],
     "repository": {
-        "import-bindings": {
-            "match": "(?:(\\w+)\\s*(=)\\s*)?([\\w.]+)\\s*(:)\\s*([^;]+)",
-            "captures": {
-                "1": {
-                    "name": "entity.name.binding.d"
-                },
-                "2": {
-                    "patterns": [
-                        {
-                            "include": "$self"
-                        }
-                    ]
-                },
-                "3": {
-                    "patterns": [
-                        {
-                            "include": "#import-support"
-                        }
-                    ]
-                },
-                "4": {
-                    "name": "keyword.operator.selection.d"
-                },
-                "5": {
-                    "patterns": [
-                        {
-                            "include": "#import-bindings-list"
-                        }
-                    ]
-                }
-            }
-        },
-        "import-bindings-list": {
-            "match": "(?:(\\w+)\\s*(=)\\s*)?(\\w+)(\\s*,[^;]+)?",
-            "captures": {
-                "1": {
-                    "name": "entity.name.binding.d"
-                },
-                "2": {
-                    "patterns": [
-                        {
-                            "include": "$self"
-                        }
-                    ]
-                },
-                "3": {
-                    "name": "entity.name.d"
-                },
-                "4": {
-                    "patterns": [
-                        {
-                            "include": "#import-bindings-list"
-                        }
-                    ]
-                }
-            }
-        },
-        "import-aliases": {
-            "match": "(?:\\s*,\\s*)?(?:(\\w+)\\s*(=)\\s*)?([\\w.]+)\\s*([^;]+)?",
-            "captures": {
-                "1": {
-                    "name": "entity.name.binding.d"
-                },
-                "2": {
-                    "patterns": [
-                        {
-                            "include": "$self"
-                        }
-                    ]
-                },
-                "3": {
-                    "patterns": [
-                        {
-                            "include": "#import-support"
-                        }
-                    ]
-                },
-                "4": {
-                    "patterns": [
-                        {
-                            "include": "#import-aliases"
-                        }
-                    ]
-                }
-            }
-        },
         "import-support": {
             "patterns": [
                 {
                     "name": "support.type.module.d",
                     "match": "\\b(etc\\.c\\.(curl|(odbc\\.(sql|sqlext|sqltypes|sqlucode)|sqlite3|zlib))|core\\.(atomic|attribute|bitop|checkint|cpuid|demangle|exception|math|memory|runtime|simd|stdc\\.(assert_|complex|ctype|errno|fenv|float_|inttypes|limits|locale|math|signal|stdarg|stddef|stdint|stdio|stdlib|string|tgmath|time|wchar_|wctype)|stdcpp\\.(exception|typeinfo)|sync\\.(barrier|condition|config|exception|mutex|rwmutex|semaphore)|thread|time|vararg)|std\\.(algorithm(\\.(comparison|iteration|mutation|searching|setops|sorting))?|array|ascii|base64|bigint|bitmanip|compiler|complex|concurrency|container(\\.(array|binaryheap|dlist|rbtree|slist|util))?|conv|csv|datetime(\\.(date|interval|stopwatch|systime|timezone))?|demangle|digest\\.(crc|digest|hmac|md|murmurhash|ripemd|sha)|encoding|exception|file|format|functional|getopt|json|math|mathspecial|meta|mmfile|net\\.(curl|isemail)|numeric|outbuffer|parallelism|path|process|random|range(\\.(interfaces|primitives))?|regex|signals|socket|stdint|stdio|string|system|traits|typecons|uni|uri|utf|uuid|variant|windows\\.(charset|syserror)|xml|zip|zlib))\\b"
-                },
-                {
-                    "name": "entity.name.namespace.d",
-                    "match": "\\b[\\w.]+\\b"
                 }
             ]
         },
