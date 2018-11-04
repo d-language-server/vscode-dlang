@@ -272,7 +272,7 @@
             }
         },
         {
-            "begin": "\\b(asm)(?!\\s*\\})([^\\{]*)",
+            "begin": "\\b(asm)\\b(?!\\s*\\})([^\\{]*)",
             "end": "\\}",
             "beginCaptures": {
                 "1": {
@@ -556,7 +556,7 @@
                     ]
                 },
                 "2": {
-                    "name": "keyword.operator.template.d"
+                    "name": "punctuation.definition.generic.begin.d"
                 }
             }
         },
