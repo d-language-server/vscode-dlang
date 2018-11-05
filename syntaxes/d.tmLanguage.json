@@ -213,14 +213,12 @@
             }
         },
         {
-            "match": "\\b(extern)\\s*(\\()\\s*((C|D|Objective-C|Pascal|System|Windows)|(C\\+\\+)(?:\\s*(,)\\s*([\\w.]+))?|([^\\)]+))\\s*(\\))",
-            "captures": {
+            "contentName": "meta.parens.d",
+            "begin": "\\b(extern)\\s*(\\()(\\s*(C\\+\\+)\\s*)(?=,|\\)|$)",
+            "end": "\\)",
+            "beginCaptures": {
                 "1": {
-                    "patterns": [
-                        {
-                            "include": "$self"
-                        }
-                    ]
+                    "name": "storage.modifier.d"
                 },
                 "2": {
                     "name": "punctuation.section.parens.begin.d"
@@ -232,18 +230,47 @@
                     "name": "constant.other.linkage.d"
                 },
                 "5": {
+                    "name": "punctuation.separator.d"
+                }
+            },
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.section.parens.end.d"
+                }
+            },
+            "patterns": [
+                {
+                    "name": "punctuation.separator.d",
+                    "match": ","
+                },
+                {
+                    "name": "entity.name.namespace.d",
+                    "match": "[\\w.]+"
+                },
+                {
+                    "include": "#string-literal"
+                }
+            ]
+        },
+        {
+            "match": "\\b(extern)\\s*(\\()(\\s*(C|D|Objective-C|Pascal|System|Windows)|([^\\)]+)\\s*)(\\))",
+            "captures": {
+                "1": {
+                    "name": "storage.modifier.d"
+                },
+                "2": {
+                    "name": "punctuation.section.parens.begin.d"
+                },
+                "3": {
+                    "name": "meta.parens.d"
+                },
+                "4": {
                     "name": "constant.other.linkage.d"
                 },
-                "6": {
-                    "name": "punctuation.separator.d"
-                },
-                "7": {
-                    "name": "entity.name.namespace.d"
-                },
-                "8": {
+                "5": {
                     "name": "invalid.illegal.d"
                 },
-                "9": {
+                "6": {
                     "name": "punctuation.section.parens.end.d"
                 }
             }
