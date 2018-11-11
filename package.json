@@ -238,6 +238,11 @@
                         "type": "boolean",
                         "default": false
                     },
+                    "d.init.logFile": {
+                        "description": "Path to a file to log DLS operations",
+                        "type": "string",
+                        "default": ""
+                    },
                     "d.init.capabilities.hover": {
                         "description": "Enable hover",
                         "type": "boolean",
