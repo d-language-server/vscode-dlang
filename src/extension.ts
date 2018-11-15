@@ -9,8 +9,6 @@ import * as lc from 'vscode-languageclient';
 import DubTaskProvider from './task-provider';
 
 const isWindows = process.platform === 'win32';
-const dmd = isWindows ? 'dmd.exe' : 'dmd';
-const ldc = isWindows ? 'ldc2.exe' : 'ldc2';
 
 export function activate(context: vsc.ExtensionContext) {
     vsc.workspace.registerTaskProvider('dub', new DubTaskProvider());
@@ -26,9 +24,14 @@ export function activate(context: vsc.ExtensionContext) {
 
     dlsPath = '';
 
-    let dub = vsc.workspace.getConfiguration('d').get<string>('dubPath') || 'dub';
-    let compiler = getCompiler();
-    let options: vsc.ProgressOptions = { location: vsc.ProgressLocation.Notification };
+    let dub = vsc.workspace.getConfiguration('d').get<string>('dubPath') || findInPath(executableName('dub'));
+    let compiler = findInPath(executableName('dmd')) || findInPath(executableName('ldc2'));
+    let options: vsc.ProgressOptions = { location: vsc.ProgressLocation.Notification, title: 'Installing DLS' };
+
+    if (!dub) {
+        vsc.window.showErrorMessage('Dub not found in PATH');
+        return;
+    }
 
     if (!compiler) {
         vsc.window.showErrorMessage('No compiler found in PATH');
@@ -36,8 +39,8 @@ export function activate(context: vsc.ExtensionContext) {
     }
 
     return vsc.window.withProgress(options, (progress) =>
-        new Promise(resolve => cp.spawn(dub, ['remove', '--version=*', 'dls']).on('exit', resolve))
-            .then(() => new Promise(resolve => cp.spawn(dub, ['fetch', 'dls']).on('exit', resolve)))
+        new Promise(resolve => cp.spawn(dub!, ['remove', '--version=*', 'dls']).on('exit', resolve))
+            .then(() => new Promise(resolve => cp.spawn(dub!, ['fetch', 'dls']).on('exit', resolve)))
             .then(() => new Promise(resolve => {
                 let args = ['run', '--compiler=' + compiler, '--quiet', 'dls:bootstrap'];
 
@@ -47,7 +50,7 @@ export function activate(context: vsc.ExtensionContext) {
 
                 args.push('--', '--progress');
 
-                let bootstrap = cp.spawn(dub, args);
+                let bootstrap = cp.spawn(dub!, args);
                 let totalSize = 0;
                 let currentSize = 0;
 
@@ -77,7 +80,7 @@ export function deactivate() {
 }
 
 function getDlsPath() {
-    let dlsExecutable = isWindows ? 'dls.exe' : 'dls';
+    let dlsExecutable = executableName('dls');
     let dlsDir = path.join(<string>process.env[isWindows ? 'LOCALAPPDATA' : 'HOME'],
         isWindows ? 'dub' : '.dub',
         'packages', '.bin');
@@ -91,19 +94,21 @@ function getDlsPath() {
     }
 }
 
-function getCompiler() {
+function findInPath(binary: string) {
     for (let p of process.env['PATH']!.split(isWindows ? ';' : ':')) {
-        for (let compiler of [dmd, ldc]) {
-            try {
-                fs.statSync(path.join(p, compiler))
-                return compiler;
-            }
-            catch (err) {
-            }
+        try {
+            fs.statSync(path.join(p, binary))
+            return binary;
+        }
+        catch (err) {
         }
     }
 
     return null;
+}
+
+function executableName(name: string) {
+    return isWindows ? name + '.exe' : name;
 }
 
 function launchServer(context: vsc.ExtensionContext, dlsPath: string) {

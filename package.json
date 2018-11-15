@@ -221,7 +221,7 @@
                     "d.dubPath": {
                         "description": "Path to the dub executable",
                         "type": "string",
-                        "default": "dub"
+                        "default": null
                     },
                     "d.dlsPath": {
                         "description": "Path to the dls executable",
