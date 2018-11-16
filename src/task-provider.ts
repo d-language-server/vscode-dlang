@@ -1,16 +1,16 @@
 'use strict';
 
 import * as vsc from 'vscode';
+import * as util from './util';
 
 export default class DubTaskProvider implements vsc.TaskProvider {
     provideTasks(token?: vsc.CancellationToken | undefined): vsc.ProviderResult<vsc.Task[]> {
         let defaultTaskDefinitions = [new DubTaskDefinition('build'), new DubTaskDefinition('test')];
         let tasksConfig = vsc.workspace.getConfiguration('tasks');
         let result: vsc.Task[] = [];
-        let config = vsc.workspace.getConfiguration('d');
 
         result = (tasksConfig.tasks || defaultTaskDefinitions).map((taskDef: DubTaskDefinition) => {
-            let args = [config.get('dubPath', 'dub'), taskDef.task];
+            let args = [util.dub, taskDef.task];
 
             for (let option of ['build', 'config', 'compiler', 'arch']) {
                 if (option in taskDef) {
