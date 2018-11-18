@@ -221,12 +221,20 @@
                     "d.dubPath": {
                         "description": "Path to the dub executable",
                         "type": "string",
-                        "default": null
+                        "default": ""
                     },
                     "d.dlsPath": {
-                        "description": "Path to the dls executable",
+                        "description": "Path to the DLS executable",
                         "type": "string",
                         "default": ""
+                    },
+                    "d.connectionType": {
+                        "description": "Method used to connect to DLS",
+                        "enum": [
+                            "stdio",
+                            "socket"
+                        ],
+                        "default": "stdio"
                     },
                     "d.init.autoUpdate": {
                         "description": "Enable auto-updating",

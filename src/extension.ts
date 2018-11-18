@@ -4,10 +4,13 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as cp from 'child_process';
 import * as rl from 'readline';
+import * as net from 'net';
 import * as vsc from 'vscode';
 import * as lc from 'vscode-languageclient';
 import * as util from './util';
 import DubTaskProvider from './task-provider';
+
+let socket: net.Socket;
 
 export function activate(context: vsc.ExtensionContext) {
     vsc.workspace.registerTaskProvider('dub', new DubTaskProvider());
@@ -92,7 +95,9 @@ function getDlsPath() {
 }
 
 function launchServer(context: vsc.ExtensionContext, dlsPath: string) {
-    const serverOptions: lc.ServerOptions = { command: dlsPath };
+    const serverOptions: lc.ServerOptions = vsc.workspace.getConfiguration('d').get('connectionType') === 'stdio'
+        ? { command: dlsPath }
+        : () => createServerWithSocket(dlsPath).then(() => ({ reader: socket, writer: socket }));
     const clientOptions: lc.LanguageClientOptions = {
         documentSelector: [{ scheme: 'file', language: 'd' }],
         synchronize: { configurationSection: 'd.dls' },
@@ -136,6 +141,21 @@ function launchServer(context: vsc.ExtensionContext, dlsPath: string) {
         }
     });
     context.subscriptions.push(client.start());
+}
+
+function createServerWithSocket(dlsPath: string) {
+    let dls: cp.ChildProcess;
+    return new Promise<cp.ChildProcess>(resolve => {
+        let server = net.createServer(s => {
+            socket = s;
+            server.close();
+            resolve(dls);
+        });
+
+        server.listen(0, '127.0.0.1', () => {
+            dls = cp.spawn(dlsPath, ['--socket=' + server.address().port]);
+        });
+    });
 }
 
 interface TranslationParams {
