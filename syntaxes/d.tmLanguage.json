@@ -434,7 +434,7 @@
         },
         {
             "name": "keyword.control.branch.d",
-            "match": "\\b(break|case|continue|default|goto|switch|version)\\b"
+            "match": "\\b(break|case|continue|default|goto|(final\\s+)?switch|version)\\b"
         },
         {
             "name": "keyword.control.conditional.d",
@@ -458,7 +458,7 @@
         },
         {
             "name": "keyword.other.d",
-            "match": "\\b(assert|cast|in|is|macro|mixin|new|out|pragma|typeid|typeof|__traits)\\b"
+            "match": "\\b((static\\s+)?assert|cast|in|is|macro|mixin|new|out|pragma|typeid|typeof|__traits)\\b"
         },
         {
             "name": "keyword.other.special.d",
