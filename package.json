@@ -421,7 +421,7 @@
         "test": "npm run compile && node ./node_modules/vscode/bin/test"
     },
     "devDependencies": {
-        "@types/node": "^8.10.37",
+        "@types/node": "^8.10.38",
         "typescript": "^3.1.6",
         "vsce": "^1.53.0",
         "vscode": "^1.1.21"
