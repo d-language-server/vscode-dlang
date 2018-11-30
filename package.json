@@ -241,6 +241,11 @@
                         "type": "boolean",
                         "default": true
                     },
+                    "d.init.preReleaseBuilds": {
+                        "description": "Enable pre-release updates",
+                        "type": "boolean",
+                        "default": false
+                    },
                     "d.init.catchErrors": {
                         "description": "Catch and ignore errors (WARNING: UNSAFE)",
                         "type": "boolean",
