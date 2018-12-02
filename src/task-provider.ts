@@ -7,28 +7,25 @@ export default class DubTaskProvider implements vsc.TaskProvider {
     provideTasks(token?: vsc.CancellationToken | undefined): vsc.ProviderResult<vsc.Task[]> {
         let defaultTaskDefinitions = [new DubTaskDefinition('build'), new DubTaskDefinition('test')];
         let tasksConfig = vsc.workspace.getConfiguration('tasks');
-        let result: vsc.Task[] = [];
 
-        result = (tasksConfig.tasks || defaultTaskDefinitions)
-        .filter((taskDef: DubTaskDefinition) => taskDef.type === 'dub' )
-        .map((taskDef: DubTaskDefinition) => {
-            let args = [util.dub, taskDef.task];
+        return (tasksConfig.tasks || defaultTaskDefinitions)
+            .filter((taskDef: DubTaskDefinition) => taskDef.type === 'dub')
+            .map((taskDef: DubTaskDefinition) => {
+                let args = [util.dub, taskDef.task];
 
-            for (let option of ['build', 'config', 'compiler', 'arch']) {
-                if (option in taskDef) {
-                    if (taskDef[option]) {
-                        args.push(`--${option}=${taskDef[option]}`);
+                for (let option of ['build', 'config', 'compiler', 'arch']) {
+                    if (option in taskDef) {
+                        if (taskDef[option]) {
+                            args.push(`--${option}=${taskDef[option]}`);
+                        }
                     }
                 }
-            }
 
-            let execution = new vsc.ShellExecution(args.join(' '));
-            let task = new vsc.Task(taskDef, taskDef.task, 'dub', execution, ['$dub-build', '$dub-test']);
-            task.group = taskDef.task === 'build' ? vsc.TaskGroup.Build : vsc.TaskGroup.Test;
-            return task;
-        });
-
-        return result;
+                let execution = new vsc.ShellExecution(args.join(' '));
+                let task = new vsc.Task(taskDef, taskDef.task, 'dub', execution, ['$dub-build', '$dub-test']);
+                task.group = taskDef.task === 'build' ? vsc.TaskGroup.Build : vsc.TaskGroup.Test;
+                return task;
+            });
     }
 
     resolveTask(task: vsc.Task, token?: vsc.CancellationToken | undefined): vsc.ProviderResult<vsc.Task> {
