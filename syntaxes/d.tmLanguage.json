@@ -553,7 +553,7 @@
         },
         {
             "name": "storage.type.string.d",
-            "match": "\\b(dstring|string|wstring)\\b"
+            "match": "(?<!\\.)\\b(dstring|string|wstring)\\b"
         },
         {
             "name": "storage.type.d",
