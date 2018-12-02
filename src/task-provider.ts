@@ -9,7 +9,9 @@ export default class DubTaskProvider implements vsc.TaskProvider {
         let tasksConfig = vsc.workspace.getConfiguration('tasks');
         let result: vsc.Task[] = [];
 
-        result = (tasksConfig.tasks || defaultTaskDefinitions).map((taskDef: DubTaskDefinition) => {
+        result = (tasksConfig.tasks || defaultTaskDefinitions)
+        .filter((taskDef: DubTaskDefinition) => taskDef.type === 'dub' )
+        .map((taskDef: DubTaskDefinition) => {
             let args = [util.dub, taskDef.task];
 
             for (let option of ['build', 'config', 'compiler', 'arch']) {
