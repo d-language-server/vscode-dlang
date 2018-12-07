@@ -96,7 +96,7 @@ function getDlsPath() {
 
 function launchServer(context: vsc.ExtensionContext, dlsPath: string) {
     const serverOptions: lc.ServerOptions = vsc.workspace.getConfiguration('d').get('connectionType') === 'stdio'
-        ? { command: dlsPath }
+        ? { command: dlsPath.trim() }
         : () => createServerWithSocket(dlsPath).then(() => ({ reader: socket, writer: socket }));
     const clientOptions: lc.LanguageClientOptions = {
         documentSelector: [{ scheme: 'file', language: 'd' }],
