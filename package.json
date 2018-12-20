@@ -221,12 +221,14 @@
                     "d.dubPath": {
                         "description": "Path to the dub executable",
                         "type": "string",
-                        "default": ""
+                        "default": "",
+                        "scope": "window"
                     },
                     "d.dlsPath": {
                         "description": "Path to the DLS executable",
                         "type": "string",
-                        "default": ""
+                        "default": "",
+                        "scope": "window"
                     },
                     "d.connectionType": {
                         "description": "Method used to connect to DLS",
@@ -234,102 +236,122 @@
                             "stdio",
                             "socket"
                         ],
-                        "default": "stdio"
+                        "default": "stdio",
+                        "scope": "window"
                     },
                     "d.init.autoUpdate": {
                         "description": "Enable auto-updating",
                         "type": "boolean",
-                        "default": true
+                        "default": true,
+                        "scope": "window"
                     },
                     "d.init.preReleaseBuilds": {
                         "description": "Enable pre-release updates",
                         "type": "boolean",
-                        "default": false
+                        "default": false,
+                        "scope": "window"
                     },
                     "d.init.catchErrors": {
                         "description": "Catch and ignore errors (WARNING: UNSAFE)",
                         "type": "boolean",
-                        "default": false
+                        "default": false,
+                        "scope": "window"
                     },
                     "d.init.logFile": {
                         "description": "Path to a file to log DLS operations",
                         "type": "string",
-                        "default": ""
+                        "default": "",
+                        "scope": "window"
                     },
                     "d.init.capabilities.hover": {
                         "description": "Enable hover",
                         "type": "boolean",
-                        "default": true
+                        "default": true,
+                        "scope": "window"
                     },
                     "d.init.capabilities.completion": {
                         "description": "Enable completion",
                         "type": "boolean",
-                        "default": true
+                        "default": true,
+                        "scope": "window"
                     },
                     "d.init.capabilities.definition": {
                         "description": "Enable go-to-definition",
                         "type": "boolean",
-                        "default": true
+                        "default": true,
+                        "scope": "window"
                     },
                     "d.init.capabilities.typeDefinition": {
                         "description": "Enable go-to-type-definition",
                         "type": "boolean",
-                        "default": true
+                        "default": true,
+                        "scope": "window"
                     },
                     "d.init.capabilities.references": {
                         "description": "Enable references search",
                         "type": "boolean",
-                        "default": true
+                        "default": true,
+                        "scope": "window"
                     },
                     "d.init.capabilities.documentHighlight": {
                         "description": "Enable symbol highlighting",
                         "type": "boolean",
-                        "default": true
+                        "default": true,
+                        "scope": "window"
                     },
                     "d.init.capabilities.documentSymbol": {
                         "description": "Enable document symbol search",
                         "type": "boolean",
-                        "default": true
+                        "default": true,
+                        "scope": "window"
                     },
                     "d.init.capabilities.workspaceSymbol": {
                         "description": "Enable workspace symbol search",
                         "type": "boolean",
-                        "default": true
+                        "default": true,
+                        "scope": "window"
                     },
                     "d.init.capabilities.codeAction": {
                         "description": "Enable code actions",
                         "type": "boolean",
-                        "default": true
+                        "default": true,
+                        "scope": "window"
                     },
                     "d.init.capabilities.documentFormatting": {
                         "description": "Enable formatting",
                         "type": "boolean",
-                        "default": true
+                        "default": true,
+                        "scope": "window"
                     },
                     "d.init.capabilities.documentRangeFormatting": {
                         "description": "Enable range formatting",
                         "type": "boolean",
-                        "default": true
+                        "default": true,
+                        "scope": "window"
                     },
                     "d.init.capabilities.documentOnTypeFormatting": {
                         "description": "Enable on type formatting",
                         "type": "boolean",
-                        "default": true
+                        "default": true,
+                        "scope": "window"
                     },
                     "d.init.capabilities.rename": {
                         "description": "Enable renaming",
                         "type": "boolean",
-                        "default": true
+                        "default": true,
+                        "scope": "window"
                     },
                     "d.dls.symbol.importPaths": {
                         "description": "Import paths",
                         "type": "array",
-                        "default": []
+                        "default": [],
+                        "scope": "window"
                     },
                     "d.dls.analysis.configFile": {
                         "description": "D-Scanner config file",
                         "type": "string",
-                        "default": "dscanner.ini"
+                        "default": "dscanner.ini",
+                        "scope": "resource"
                     },
                     "d.dls.format.endOfLine": {
                         "description": "End of line",
@@ -338,17 +360,20 @@
                             "cr",
                             "crlf"
                         ],
-                        "default": "lf"
+                        "default": "lf",
+                        "scope": "resource"
                     },
                     "d.dls.format.maxLineLength": {
                         "description": "Max line length",
                         "type": "number",
-                        "default": 120
+                        "default": 120,
+                        "scope": "resource"
                     },
                     "d.dls.format.dfmtAlignSwitchStatements": {
                         "description": "Align switch statements",
                         "type": "boolean",
-                        "default": true
+                        "default": true,
+                        "scope": "resource"
                     },
                     "d.dls.format.dfmtBraceStyle": {
                         "description": "Brace style",
@@ -357,47 +382,56 @@
                             "otbs",
                             "stroustrup"
                         ],
-                        "default": "allman"
+                        "default": "allman",
+                        "scope": "resource"
                     },
                     "d.dls.format.dfmtOutdentAttributes": {
                         "description": "Outdent attributes",
                         "type": "boolean",
-                        "default": true
+                        "default": true,
+                        "scope": "resource"
                     },
                     "d.dls.format.dfmtSoftMaxLineLength": {
                         "description": "Soft max line length",
                         "type": "number",
-                        "default": 80
+                        "default": 80,
+                        "scope": "resource"
                     },
                     "d.dls.format.dfmtSpaceAfterCast": {
                         "description": "Space after cast",
                         "type": "boolean",
-                        "default": true
+                        "default": true,
+                        "scope": "resource"
                     },
                     "d.dls.format.dfmtSpaceAfterKeywords": {
                         "description": "Space after keywords",
                         "type": "boolean",
-                        "default": true
+                        "default": true,
+                        "scope": "resource"
                     },
                     "d.dls.format.dfmtSpaceBeforeFunctionParameters": {
                         "description": "Space before function parameters",
                         "type": "boolean",
-                        "default": false
+                        "default": false,
+                        "scope": "resource"
                     },
                     "d.dls.format.dfmtSplitOperatorAtLineEnd": {
                         "description": "Split operator at line end",
                         "type": "boolean",
-                        "default": false
+                        "default": false,
+                        "scope": "resource"
                     },
                     "d.dls.format.dfmtSelectiveImportSpace": {
                         "description": "Selective import space",
                         "type": "boolean",
-                        "default": true
+                        "default": true,
+                        "scope": "resource"
                     },
                     "d.dls.format.dfmtCompactLabeledStatements": {
                         "description": "Compact labeled statements",
                         "type": "boolean",
-                        "default": true
+                        "default": true,
+                        "scope": "resource"
                     },
                     "d.dls.format.dfmtTemplateConstraintStyle": {
                         "description": "Template constraint style",
@@ -407,12 +441,14 @@
                             "alwaysNewline",
                             "alwaysNewlineIndent"
                         ],
-                        "default": "conditionalNewlineIndent"
+                        "default": "conditionalNewlineIndent",
+                        "scope": "resource"
                     },
                     "d.dls.format.dfmtSingleTemplateConstraintIndent": {
                         "description": "Single template constraint indent",
                         "type": "boolean",
-                        "default": false
+                        "default": false,
+                        "scope": "resource"
                     }
                 }
             }
