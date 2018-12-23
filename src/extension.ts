@@ -94,8 +94,13 @@ function getDlsPath() {
     }
 }
 
+function getConnectionType() {
+    let type = vsc.workspace.getConfiguration('d').get('connectionType');
+    return type === 'default' ? util.isWindows ? 'socket' : 'stdio' : type;
+}
+
 function launchServer(context: vsc.ExtensionContext, dlsPath: string) {
-    const serverOptions: lc.ServerOptions = vsc.workspace.getConfiguration('d').get('connectionType') === 'stdio'
+    const serverOptions: lc.ServerOptions = getConnectionType() === 'stdio'
         ? { command: dlsPath.trim() }
         : () => createServerWithSocket(dlsPath).then(() => ({ reader: socket, writer: socket }));
     const clientOptions: lc.LanguageClientOptions = {

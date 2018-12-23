@@ -231,12 +231,13 @@
                         "scope": "window"
                     },
                     "d.connectionType": {
-                        "description": "Method used to connect to DLS",
+                        "description": "Method used to connect to DLS (default is socket on Windows and stdio otherwise)",
                         "enum": [
+                            "default",
                             "stdio",
                             "socket"
                         ],
-                        "default": "stdio",
+                        "default": "default",
                         "scope": "window"
                     },
                     "d.init.autoUpdate": {
