@@ -347,6 +347,12 @@
                         "default": [],
                         "scope": "window"
                     },
+                    "d.dls.symbol.listLocalSymbols": {
+                        "description": "List local symbols",
+                        "type": "boolean",
+                        "default": false,
+                        "scope": "resource"
+                    },
                     "d.dls.analysis.configFile": {
                         "description": "D-Scanner config file",
                         "type": "string",
