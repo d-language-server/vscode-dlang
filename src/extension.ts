@@ -153,6 +153,7 @@ function createServerWithSocket(dlsPath: string) {
     return new Promise<cp.ChildProcess>(resolve => {
         let server = net.createServer(s => {
             socket = s;
+            socket.setNoDelay(true);
             server.close();
             resolve(dls);
         });
