@@ -108,7 +108,7 @@ function launchServer(context: vsc.ExtensionContext, dlsPath: string) {
         synchronize: { configurationSection: 'd.dls' },
         initializationOptions: vsc.workspace.getConfiguration('d').get('init')
     };
-    const client = new lc.LanguageClient('vscode-dls', 'DLS', serverOptions, clientOptions);
+    const client = new lc.LanguageClient('d', 'DLS', serverOptions, clientOptions);
     client.onReady().then(() => {
         {
             let task: vsc.Progress<{ increment?: number, message?: string }>;

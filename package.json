@@ -240,6 +240,16 @@
                         "default": "default",
                         "scope": "window"
                     },
+                    "d.trace.server": {
+                        "description": "Traces the communication between VS Code and the HTML language server",
+                        "enum": [
+                            "off",
+                            "messages",
+                            "verbose"
+                        ],
+                        "default": "off",
+                        "scope": "window"
+                    },
                     "d.init.autoUpdate": {
                         "description": "Enable auto-updating",
                         "type": "boolean",
