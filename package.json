@@ -346,7 +346,7 @@
                         "description": "Import paths",
                         "type": "array",
                         "default": [],
-                        "scope": "window"
+                        "scope": "resource"
                     },
                     "d.dls.symbol.listLocalSymbols": {
                         "description": "List local symbols",
