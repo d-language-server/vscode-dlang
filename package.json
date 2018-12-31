@@ -261,6 +261,12 @@
                         "default": false,
                         "scope": "window"
                     },
+                    "d.init.safeMode": {
+                        "description": "Disable processing multiple requests in parallel",
+                        "type": "boolean",
+                        "default": false,
+                        "scope": "window"
+                    },
                     "d.init.catchErrors": {
                         "description": "Catch and ignore errors (WARNING: UNSAFE)",
                         "type": "boolean",
