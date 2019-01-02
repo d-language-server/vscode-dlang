@@ -140,6 +140,20 @@ function launchServer(context: vsc.ExtensionContext, dlsPath: string) {
             client.onNotification('$/dls/upgradeSelections/didStop', () => resolve());
         }
     });
+
+    let startingItem: vsc.StatusBarItem;
+    client.onDidChangeState(e => {
+        if (e.newState == lc.State.Starting) {
+            startingItem = vsc.window.createStatusBarItem(vsc.StatusBarAlignment.Left);
+            startingItem.text = 'Starting DLS...'
+            startingItem.show();
+        }
+
+        if (e.oldState == lc.State.Starting) {
+            startingItem.dispose();
+        }
+    });
+
     context.subscriptions.push(client.start());
 }
 
