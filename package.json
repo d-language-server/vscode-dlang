@@ -3,7 +3,7 @@
     "displayName": "Dlang",
     "description": "Support for the D programming language using DLS",
     "icon": "res/icon.png",
-    "version": "1.15.0",
+    "version": "1.15.1",
     "publisher": "LaurentTreguier",
     "repository": {
         "url": "https://github.com/d-language-server/vscode-dls",
