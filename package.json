@@ -1,12 +1,12 @@
 {
     "name": "vscode-dls",
     "displayName": "Dlang",
-    "description": "Support for the D programming language using DLS",
+    "description": "D language support for Visual Studio Code",
     "icon": "res/icon.png",
     "version": "1.15.1",
     "publisher": "LaurentTreguier",
     "repository": {
-        "url": "https://github.com/d-language-server/vscode-dls",
+        "url": "https://github.com/d-language-server/vscode-dlang",
         "type": "git"
     },
     "author": {
@@ -14,7 +14,7 @@
         "url": "https://github.com/LaurentTreguier"
     },
     "bugs": {
-        "url": "https://github.com/d-language-server/vscode-dls/issues"
+        "url": "https://github.com/d-language-server/vscode-dlang/issues"
     },
     "engines": {
         "vscode": "^1.30.0"
