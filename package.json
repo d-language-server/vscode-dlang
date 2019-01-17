@@ -357,6 +357,12 @@
                         "default": true,
                         "scope": "window"
                     },
+                    "d.init.symbol.autoImports": {
+                        "description": "Automatically import projects and their dependencies",
+                        "type": "boolean",
+                        "default": true,
+                        "scope": "window"
+                    },
                     "d.dls.symbol.importPaths": {
                         "description": "Import paths",
                         "type": "array",
