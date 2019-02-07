@@ -22,7 +22,7 @@ export default class DubTaskProvider implements vsc.TaskProvider {
                 }
 
                 let execution = new vsc.ShellExecution(args.join(' '));
-                let task = new vsc.Task(taskDef, taskDef.task, 'dub', execution, ['$dub-build', '$dub-test']);
+                let task = new vsc.Task(taskDef, vsc.TaskScope.Workspace, taskDef.task, 'dub', execution, ['$dub-build', '$dub-test']);
                 task.group = taskDef.task === 'build' ? vsc.TaskGroup.Build : vsc.TaskGroup.Test;
                 return task;
             });
