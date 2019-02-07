@@ -168,7 +168,7 @@ function createServerWithSocket(dlsPath: string) {
         });
 
         server.listen(0, '127.0.0.1', () => {
-            dls = cp.spawn(dlsPath.trim(), ['--socket=' + server.address().port]);
+            dls = cp.spawn(dlsPath.trim(), ['--socket=' + (<net.AddressInfo>server.address()).port]);
         });
     });
 }

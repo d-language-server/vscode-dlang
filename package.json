@@ -17,7 +17,7 @@
         "url": "https://github.com/d-language-server/vscode-dlang/issues"
     },
     "engines": {
-        "vscode": "^1.30.0"
+        "vscode": "^1.31.0"
     },
     "categories": [
         "Programming Languages",
@@ -490,10 +490,10 @@
         "test": "npm run compile && node ./node_modules/vscode/bin/test"
     },
     "devDependencies": {
-        "@types/node": "^8.10.39",
-        "typescript": "^3.2.2",
-        "vsce": "^1.54.0",
-        "vscode": "^1.1.26"
+        "@types/node": "^10.12.21",
+        "typescript": "^3.3.1",
+        "vsce": "^1.56.0",
+        "vscode": "^1.1.29"
     },
     "dependencies": {
         "vscode-languageclient": "^5.2.1"
