@@ -29,51 +29,52 @@ export function activate(context: vsc.ExtensionContext) {
     let options: vsc.ProgressOptions = { location: vsc.ProgressLocation.Notification, title: 'Installing DLS' };
 
     if (!util.dub) {
-        vsc.window.showErrorMessage('Dub not found in PATH');
-        return;
+        return vsc.window.showErrorMessage('Dub not found in PATH');
     }
 
     if (!util.compiler) {
-        vsc.window.showErrorMessage('No compiler found in PATH');
-        return;
+        return vsc.window.showErrorMessage('No compiler found in PATH');
     }
 
-    return vsc.window.withProgress(options, (progress) =>
-        new Promise(resolve => cp.spawn(util.dub!, ['remove', '--version=*', 'dls']).on('exit', resolve))
-            .then(() => new Promise(resolve => cp.spawn(util.dub!, ['fetch', 'dls']).on('exit', resolve)))
-            .then(() => new Promise(resolve => {
-                let args = ['run', '--compiler=' + util.compiler, '--quiet', 'dls:bootstrap'];
+    return vsc.window.withProgress(options, async progress => {
+        await new Promise(resolve => cp.spawn(util.dub!, ['remove', '--version=*', 'dls']).on('exit', resolve));
+        await new Promise(resolve => cp.spawn(util.dub!, ['fetch', 'dls']).on('exit', resolve));
 
-                if (util.isWindows && util.compiler === 'ldc2.exe' && process.arch === 'x64') {
-                    args.push('--arch=x86_64');
-                }
+        let args = ['run', '--compiler=' + util.compiler, '--quiet', 'dls:bootstrap'];
 
-                args.push('--', '--progress');
+        if (util.isWindows && util.compiler === 'ldc2.exe' && process.arch === 'x64') {
+            args.push('--arch=x86_64');
+        }
 
-                let bootstrap = cp.spawn(util.dub!, args);
-                let totalSize = 0;
-                let currentSize = 0;
+        args.push('--', '--progress');
 
-                bootstrap.stdout.on('data', data => dlsPath += data.toString())
-                    .on('end', resolve);
-                rl.createInterface(bootstrap.stderr)
-                    .on('line', (line: string) => {
-                        const size = Number(line);
+        let bootstrap = cp.spawn(util.dub!, args);
+        let totalSize = 0;
+        let currentSize = 0;
+        let promise = new Promise(resolve => bootstrap.stdout
+            .on('data', data => dlsPath += data.toString())
+            .on('end', resolve));
 
-                        if (line === 'extract') {
-                            progress.report({ message: 'Extracting' });
-                        } else if (totalSize === 0) {
-                            totalSize = size;
-                        } else {
-                            currentSize = size;
-                            progress.report({
-                                increment: 100 * (size - currentSize) / totalSize,
-                                message: `Downloading`
-                            });
-                        }
+        rl.createInterface(bootstrap.stderr)
+            .on('line', (line: string) => {
+                const size = Number(line);
+
+                if (line === 'extract') {
+                    progress.report({ message: 'Extracting' });
+                } else if (totalSize === 0) {
+                    totalSize = size;
+                } else {
+                    currentSize = size;
+                    progress.report({
+                        increment: 100 * (size - currentSize) / totalSize,
+                        message: 'Downloading'
                     });
-            }))
-            .then(() => launchServer(context, dlsPath)));
+                }
+            });
+
+        await promise;
+        return launchServer(context, dlsPath);
+    });
 }
 
 export function deactivate() {
