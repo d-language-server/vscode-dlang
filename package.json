@@ -490,10 +490,10 @@
         "test": "npm run compile && node ./node_modules/vscode/bin/test"
     },
     "devDependencies": {
-        "@types/node": "^10.12.21",
-        "typescript": "^3.3.1",
-        "vsce": "^1.56.0",
-        "vscode": "^1.1.29"
+        "@types/node": "^10.12.26",
+        "typescript": "^3.3.3333",
+        "vsce": "^1.57.1",
+        "vscode": "^1.1.30"
     },
     "dependencies": {
         "vscode-languageclient": "^5.2.1"
