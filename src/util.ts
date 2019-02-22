@@ -6,7 +6,9 @@ import * as vsc from 'vscode';
 
 export const isWindows = process.platform === 'win32';
 export const dub = vsc.workspace.getConfiguration('d').get<string>('dubPath', 'dub') || findInPath(executableName('dub'));
-export const compiler = findInPath(executableName('dmd')) || findInPath(executableName('ldc2'));
+export const compiler = findInPath(executableName('dmd'))
+    || findInPath(executableName('ldc2'))
+    || findInPath(executableName('gdc'));
 
 export function findInPath(binary: string) {
     for (let p of process.env['PATH']!.split(isWindows ? ';' : ':')) {
