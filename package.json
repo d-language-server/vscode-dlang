@@ -240,7 +240,7 @@
                         "scope": "window"
                     },
                     "d.trace.server": {
-                        "description": "Traces the communication between VS Code and the HTML language server",
+                        "description": "Traces the communication between VS Code and the D language server",
                         "enum": [
                             "off",
                             "messages",
