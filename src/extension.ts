@@ -97,8 +97,8 @@ function getDlsPath() {
 
 function launchServer(context: vsc.ExtensionContext, dlsPath: string) {
     const serverOptions: lc.ServerOptions = vsc.workspace.getConfiguration('d').get('connectionType') === 'stdio'
-        ? { command: dlsPath.trim() }
-        : () => createServerWithSocket(dlsPath).then(() => ({ reader: socket, writer: socket }));
+        ? () => createServerWithStdio(dlsPath).then<lc.ChildProcessInfo>(dls => ({ process: dls, detached: true }))
+        : () => createServerWithSocket(dlsPath).then<lc.StreamInfo>(() => ({ reader: socket, writer: socket, detached: true }));
     const clientOptions: lc.LanguageClientOptions = {
         documentSelector: [{ scheme: 'file', language: 'd' }],
         synchronize: { configurationSection: 'd.dls' },
@@ -156,6 +156,10 @@ function launchServer(context: vsc.ExtensionContext, dlsPath: string) {
     });
 
     context.subscriptions.push(client.start());
+}
+
+function createServerWithStdio(dlsPath: string) {
+    return Promise.resolve(cp.spawn(dlsPath.trim(), ['--stdio']));
 }
 
 function createServerWithSocket(dlsPath: string) {
