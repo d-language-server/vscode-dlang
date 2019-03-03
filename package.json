@@ -381,6 +381,12 @@
                         "default": "dscanner.ini",
                         "scope": "resource"
                     },
+                    "d.dls.analysis.filePatterns": {
+                        "description": "File patterns to analyze",
+                        "type": "array",
+                        "default": [],
+                        "scope": "resource"
+                    },
                     "d.dls.format.endOfLine": {
                         "description": "End of line",
                         "enum": [
