@@ -387,6 +387,15 @@
                         "default": [],
                         "scope": "resource"
                     },
+                    "d.dls.format.engine": {
+                        "description": "Formatting engine",
+                        "enum": [
+                            "dfmt",
+                            "indent"
+                        ],
+                        "default": "indent",
+                        "scope": "window"
+                    },
                     "d.dls.format.endOfLine": {
                         "description": "End of line",
                         "enum": [
