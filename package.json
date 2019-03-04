@@ -393,7 +393,7 @@
                             "dfmt",
                             "indent"
                         ],
-                        "default": "indent",
+                        "default": "dfmt",
                         "scope": "window"
                     },
                     "d.dls.format.endOfLine": {
