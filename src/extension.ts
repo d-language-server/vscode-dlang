@@ -40,14 +40,7 @@ export function activate(context: vsc.ExtensionContext) {
         await new Promise(resolve => cp.spawn(util.dub!, ['remove', '--version=*', 'dls']).on('exit', resolve));
         await new Promise(resolve => cp.spawn(util.dub!, ['fetch', 'dls']).on('exit', resolve));
 
-        let args = ['run', '--compiler=' + util.compiler, '--quiet', 'dls:bootstrap'];
-
-        if (util.isWindows && util.compiler === 'ldc2.exe' && process.arch === 'x64') {
-            args.push('--arch=x86_64');
-        }
-
-        args.push('--', '--progress');
-
+        let args = ['run', '--compiler=' + util.compiler, '--quiet', 'dls:bootstrap', '--', '--progress'];
         let bootstrap = cp.spawn(util.dub!, args);
         let totalSize = 0;
         let currentSize = 0;
