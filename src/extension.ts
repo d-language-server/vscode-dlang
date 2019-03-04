@@ -89,9 +89,9 @@ function getDlsPath() {
 }
 
 function launchServer(context: vsc.ExtensionContext, dlsPath: string) {
-    const serverOptions: lc.ServerOptions = vsc.workspace.getConfiguration('d').get('connectionType') === 'stdio'
-        ? () => createServerWithStdio(dlsPath).then<lc.ChildProcessInfo>(dls => ({ process: dls, detached: true }))
-        : () => createServerWithSocket(dlsPath).then<lc.StreamInfo>(() => ({ reader: socket, writer: socket, detached: true }));
+    const serverOptions: lc.ServerOptions = vsc.workspace.getConfiguration('d').get('connectionType') === 'socket'
+        ? () => createServerWithSocket(dlsPath).then<lc.StreamInfo>(() => ({ reader: socket, writer: socket }))
+        : () => createServerWithStdio(dlsPath);
     const clientOptions: lc.LanguageClientOptions = {
         documentSelector: [{ scheme: 'file', language: 'd' }],
         synchronize: { configurationSection: 'd.dls' },
