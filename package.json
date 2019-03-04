@@ -382,7 +382,7 @@
                         "scope": "resource"
                     },
                     "d.dls.analysis.filePatterns": {
-                        "description": "File patterns to analyze",
+                        "description": "Patterns for files to analyze (see https://dlang.org/phobos/std_path.html#.globMatch for pattern syntax)",
                         "type": "array",
                         "default": [],
                         "scope": "resource"
