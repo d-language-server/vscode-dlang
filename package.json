@@ -391,7 +391,7 @@
                         "description": "Formatting engine",
                         "enum": [
                             "dfmt",
-                            "indent"
+                            "builtin"
                         ],
                         "default": "dfmt",
                         "scope": "window"
@@ -406,19 +406,31 @@
                         "default": "lf",
                         "scope": "resource"
                     },
+                    "d.dls.format.insertFinalNewline": {
+                        "description": "Insert final newline",
+                        "type": "boolean",
+                        "default": true,
+                        "scope": "resource"
+                    },
+                    "d.dls.format.trimTrailingWhitespace": {
+                        "description": "Trim trailing whitespace",
+                        "type": "boolean",
+                        "default": true,
+                        "scope": "resource"
+                    },
                     "d.dls.format.maxLineLength": {
                         "description": "Max line length",
                         "type": "number",
                         "default": 120,
                         "scope": "resource"
                     },
-                    "d.dls.format.dfmtAlignSwitchStatements": {
-                        "description": "Align switch statements",
-                        "type": "boolean",
-                        "default": true,
+                    "d.dls.format.softMaxLineLength": {
+                        "description": "Soft max line length",
+                        "type": "number",
+                        "default": 80,
                         "scope": "resource"
                     },
-                    "d.dls.format.dfmtBraceStyle": {
+                    "d.dls.format.braceStyle": {
                         "description": "Brace style",
                         "enum": [
                             "allman",
@@ -428,56 +440,62 @@
                         "default": "allman",
                         "scope": "resource"
                     },
-                    "d.dls.format.dfmtOutdentAttributes": {
-                        "description": "Outdent attributes",
+                    "d.dls.format.spaceAfterCasts": {
+                        "description": "Space after casts",
                         "type": "boolean",
                         "default": true,
                         "scope": "resource"
                     },
-                    "d.dls.format.dfmtSoftMaxLineLength": {
-                        "description": "Soft max line length",
-                        "type": "number",
-                        "default": 80,
-                        "scope": "resource"
-                    },
-                    "d.dls.format.dfmtSpaceAfterCast": {
-                        "description": "Space after cast",
-                        "type": "boolean",
-                        "default": true,
-                        "scope": "resource"
-                    },
-                    "d.dls.format.dfmtSpaceAfterKeywords": {
+                    "d.dls.format.spaceAfterKeywords": {
                         "description": "Space after keywords",
                         "type": "boolean",
                         "default": true,
                         "scope": "resource"
                     },
-                    "d.dls.format.dfmtSpaceBeforeFunctionParameters": {
+                    "d.dls.format.spaceBeforeAAColons": {
+                        "description": "Space before AA colons",
+                        "type": "boolean",
+                        "default": false,
+                        "scope": "resource"
+                    },
+                    "d.dls.format.spaceBeforeFunctionParameters": {
                         "description": "Space before function parameters",
                         "type": "boolean",
                         "default": false,
                         "scope": "resource"
                     },
-                    "d.dls.format.dfmtSplitOperatorAtLineEnd": {
-                        "description": "Split operator at line end",
-                        "type": "boolean",
-                        "default": false,
-                        "scope": "resource"
-                    },
-                    "d.dls.format.dfmtSelectiveImportSpace": {
-                        "description": "Selective import space",
+                    "d.dls.format.spaceBeforeSelectiveImportColons": {
+                        "description": "Space before selective import colons",
                         "type": "boolean",
                         "default": true,
                         "scope": "resource"
                     },
-                    "d.dls.format.dfmtCompactLabeledStatements": {
+                    "d.dls.format.alignSwitchStatements": {
+                        "description": "Align switch statements",
+                        "type": "boolean",
+                        "default": true,
+                        "scope": "resource"
+                    },
+                    "d.dls.format.compactLabeledStatements": {
                         "description": "Compact labeled statements",
                         "type": "boolean",
                         "default": true,
                         "scope": "resource"
                     },
-                    "d.dls.format.dfmtTemplateConstraintStyle": {
-                        "description": "Template constraint style",
+                    "d.dls.format.outdentAttributes": {
+                        "description": "Outdent attributes",
+                        "type": "boolean",
+                        "default": true,
+                        "scope": "resource"
+                    },
+                    "d.dls.format.splitOperatorsAtLineEnd": {
+                        "description": "Split operators at line end",
+                        "type": "boolean",
+                        "default": false,
+                        "scope": "resource"
+                    },
+                    "d.dls.format.templateConstraintsStyle": {
+                        "description": "Template constraints style",
                         "enum": [
                             "conditionalNewlineIndent",
                             "conditionalNewline",
@@ -487,8 +505,8 @@
                         "default": "conditionalNewlineIndent",
                         "scope": "resource"
                     },
-                    "d.dls.format.dfmtSingleTemplateConstraintIndent": {
-                        "description": "Single template constraint indent",
+                    "d.dls.format.templateConstraintsSingleIndent": {
+                        "description": "Template constraints single indent",
                         "type": "boolean",
                         "default": false,
                         "scope": "resource"
