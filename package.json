@@ -523,9 +523,9 @@
         "test": "npm run compile && node ./node_modules/vscode/bin/test"
     },
     "devDependencies": {
-        "@types/node": "^10.12.29",
+        "@types/node": "^10.14.1",
         "typescript": "^3.3.3333",
-        "vsce": "^1.57.1",
+        "vsce": "^1.58.0",
         "vscode": "^1.1.30"
     },
     "dependencies": {
