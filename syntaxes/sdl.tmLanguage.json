@@ -72,11 +72,11 @@
             "match": "\\bnull\\b"
         },
         {
-            "name": "constant.other.date.sdl",
+            "name": "constant.numeric.date.sdl",
             "match": "\\b\\d{4}/\\d{2}/\\d{2}(?:\\s+(?:\\d+d:)?\\d+:\\d+:\\d+\\.?\\d*(?:-[A-Z]{3})?)?\\b"
         },
         {
-            "name": "constant.other.duration.sdl",
+            "name": "constant.numeric.duration.sdl",
             "match": "\\b(?:\\d+d:)?\\d+:\\d+:\\d+(?:\\.\\d+)?\\b"
         },
         {
