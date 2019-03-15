@@ -572,7 +572,7 @@
             "match": "\\b(Error|Exception|Interface|Object|OffsetTypeInfo|RTInfo|Throwable|TypeInfo|TypeInfo_Class)\\b"
         },
         {
-            "match": "\\b([a-z_]\\w*)\\s*(!)(?!in\\b|is\\b|=)",
+            "match": "\\b([\\p{Ll}\\p{Lo}_]\\w*)\\s*(!)(?!in\\b|is\\b|=)",
             "captures": {
                 "1": {
                     "name": "entity.name.function.d",
@@ -588,7 +588,7 @@
             }
         },
         {
-            "match": "(?<!\\w!)\\b([a-z_]\\w*)\\s*(?=\\()",
+            "match": "(?<!\\w!)\\b([\\p{Ll}\\p{Lo}_]\\w*)\\s*(?=\\()",
             "captures": {
                 "1": {
                     "name": "entity.name.function.d",
@@ -601,7 +601,7 @@
             }
         },
         {
-            "match": "(?<=[^.]\\.)\\s*(?:(alignof|assumeSafeAppend|capacity|classinfo|clear|dig|dup|epsilon|hashOf|idup|im|infinity|init|keys|mangleof|mant_dig|max|max(?:_10)?_exp|min|min(?:_10)?_exp|min_normal|nan|offsetof|ptr|re|rehash|reserve|sizeof|stringof|tupleof|values|__vptr|__monitor)|([a-zA-Z_]\\w*))\\b",
+            "match": "(?<=[^.]\\.)\\s*(?:(alignof|assumeSafeAppend|capacity|classinfo|clear|dig|dup|epsilon|hashOf|idup|im|infinity|init|keys|mangleof|mant_dig|max|max(?:_10)?_exp|min|min(?:_10)?_exp|min_normal|nan|offsetof|ptr|re|rehash|reserve|sizeof|stringof|tupleof|values|__vptr|__monitor)|([\\p{L}_]\\w*))\\b",
             "captures": {
                 "1": {
                     "name": "support.constant.property.d"
@@ -613,11 +613,11 @@
         },
         {
             "name": "constant.other.d",
-            "match": "\\b[A-Z][A-Z0-9_]*\\b"
+            "match": "\\b[\\p{Lu}\\p{Lo}][\\p{Lu}\\p{Lo}0-9_]*\\b"
         },
         {
             "name": "entity.name.type.d",
-            "match": "\\b[A-Z]\\w*\\b"
+            "match": "\\b[\\p{Lu}\\p{Lo}]\\w*\\b"
         },
         {
             "name": "punctuation.separator.d",
@@ -782,7 +782,7 @@
         },
         "string-escaped-char": {
             "name": "constant.character.escape.d",
-            "match": "\\\\(['\"?\\\\0abnfrtv]|x[\\da-fA-F]{2}|[0-3]?[0-7]{1,2}|u[\\da-fA-F]{4}|U[\\da-fA-F]{8}|&[a-zA-Z]{1,8};)"
+            "match": "\\\\(['\"?\\\\0abnfrtv]|x[\\da-fA-F]{2}|[0-3]?[0-7]{1,2}|u[\\da-fA-F]{4}|U[\\da-fA-F]{8}|&[\\p{L}]{1,8};)"
         },
         "integer-literal": {
             "patterns": [

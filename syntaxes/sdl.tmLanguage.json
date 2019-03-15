@@ -84,7 +84,7 @@
             "match": "\\b\\d+(\\.\\d+)?(L|l|F|f|D|d|BD|bd)?\\b"
         },
         {
-            "match": "\\b([a-zA-Z_][\\w\\-$.]*(:[a-zA-Z_][\\w\\-$.]*)?)=",
+            "match": "\\b([\\p{L}_][\\w\\-$.]*(:[\\p{L}_][\\w\\-$.]*)?)=",
             "captures": {
                 "1": {
                     "name": "entity.other.attribute-name.sdl"
@@ -92,7 +92,7 @@
             }
         },
         {
-            "match": "(?:^|;|\\{)\\s*([a-zA-Z_][\\w\\-$.]*(?::[a-zA-Z_][\\w\\-$.]*)?)\\b",
+            "match": "(?:^|;|\\{)\\s*([\\p{L}_][\\w\\-$.]*(?::[\\p{L}_][\\w\\-$.]*)?)\\b",
             "captures": {
                 "1": {
                     "name": "entity.name.tag.sdl"
