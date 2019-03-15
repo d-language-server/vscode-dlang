@@ -140,7 +140,7 @@
                     "name": "storage.type.id.diet"
                 },
                 "3": {
-                    "name": "entity.name.id.diet"
+                    "name": "entity.other.attribute-name.id.diet"
                 },
                 "4": {
                     "patterns": [
@@ -150,23 +150,14 @@
                         },
                         {
                             "name": "entity.name.class.diet",
-                            "match": "."
+                            "match": "[^.]+"
                         }
                     ]
                 },
                 "5": {
                     "patterns": [
                         {
-                            "match": "\\s+.*",
-                            "captures": {
-                                "0": {
-                                    "patterns": [
-                                        {
-                                            "include": "#tag-content"
-                                        }
-                                    ]
-                                }
-                            }
+                            "include": "#tag-content"
                         },
                         {
                             "include": "#tag-attributes"
@@ -277,36 +268,38 @@
         "tag-content": {
             "patterns": [
                 {
-                    "match": "((?:<|>){0,2})(&)?(?:(!?=)(.*))?(.*)",
+                    "name": "keyword.operator.i18n.diet",
+                    "match": "&"
+                },
+                {
+                    "name": "keyword.operator.whitespace-removal.diet",
+                    "match": "(<|>){1,2}"
+                },
+                {
+                    "match": "(!?=)(.+)",
                     "captures": {
                         "1": {
-                            "name": "keyword.operator.whitespace-removal.diet"
-                        },
-                        "2": {
-                            "name": "keyword.operator.i18n.diet"
-                        },
-                        "3": {
                             "name": "keyword.operator.diet"
                         },
-                        "4": {
+                        "2": {
                             "patterns": [
                                 {
                                     "include": "source.d"
                                 }
                             ]
-                        },
-                        "5": {
-                            "patterns": [
-                                {
-                                    "include": "#string-interpolation"
-                                },
-                                {
-                                    "name": "constant.character.diet",
-                                    "match": "&\\w+;"
-                                }
-                            ]
                         }
                     }
+                },
+                {
+                    "patterns": [
+                        {
+                            "include": "#string-interpolation"
+                        },
+                        {
+                            "name": "constant.character.diet",
+                            "match": "&\\w+;"
+                        }
+                    ]
                 }
             ]
         },
