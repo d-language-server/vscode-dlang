@@ -524,10 +524,10 @@
     },
     "devDependencies": {
         "@types/node": "10.x.x",
-        "@types/webpack": "^4.4.26",
+        "@types/webpack": "^4.4.27",
         "ts-loader": "^5.3.3",
         "ts-node": "^8.0.3",
-        "typescript": "^3.4.1",
+        "typescript": "^3.4.2",
         "vsce": "^1.59.0",
         "vscode": "^1.1.33",
         "webpack": "^4.29.6",
