@@ -8,24 +8,24 @@ import * as net from 'net';
 import * as vsc from 'vscode';
 import * as lc from 'vscode-languageclient';
 import * as util from './util';
+import { promisify } from 'util';
 import DubTaskProvider from './task-provider';
 
 let socket: net.Socket;
 
-export function activate(context: vsc.ExtensionContext) {
+export async function activate(context: vsc.ExtensionContext) {
     vsc.workspace.registerTaskProvider('dub', new DubTaskProvider());
-    let dlsPath = vsc.workspace.getConfiguration('d').get<string>('dlsPath') || getDlsPath();
+    let dlsPath = vsc.workspace.getConfiguration('d').get<string>('dlsPath') || await getDlsPath();
 
     if (dlsPath.length) {
         try {
-            fs.statSync(dlsPath);
+            await promisify(fs.stat)(dlsPath);
             return launchServer(context, dlsPath);
         } catch (err) {
         }
     }
 
     dlsPath = '';
-
     let options: vsc.ProgressOptions = { location: vsc.ProgressLocation.Notification, title: 'Installing DLS' };
 
     if (!util.dub) {
@@ -73,7 +73,7 @@ export function activate(context: vsc.ExtensionContext) {
 export function deactivate() {
 }
 
-function getDlsPath() {
+async function getDlsPath() {
     let dlsExecutable = util.executableName('dls');
     let dlsDir = path.join(<string>process.env[util.isWindows ? 'LOCALAPPDATA' : 'HOME'],
         util.isWindows ? 'dub' : '.dub',
@@ -81,7 +81,7 @@ function getDlsPath() {
 
     try {
         let dls = path.join(dlsDir, 'dls-latest', dlsExecutable);
-        fs.statSync(dls);
+        await promisify(fs.stat)(dls);
         return dls;
     } catch (err) {
         return path.join(dlsDir, dlsExecutable);
