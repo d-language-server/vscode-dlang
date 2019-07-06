@@ -3,7 +3,7 @@
     "displayName": "Dlang",
     "description": "D language support for Visual Studio Code",
     "icon": "res/icon.png",
-    "version": "1.16.4",
+    "version": "1.16.5",
     "publisher": "LaurentTreguier",
     "repository": {
         "url": "https://github.com/d-language-server/vscode-dlang",
