@@ -17,7 +17,7 @@
         "url": "https://github.com/d-language-server/vscode-dlang/issues"
     },
     "engines": {
-        "vscode": "^1.40.0"
+        "vscode": "^1.43.0"
     },
     "categories": [
         "Programming Languages",
@@ -522,17 +522,17 @@
         "watch": "webpack --mode none --watch"
     },
     "devDependencies": {
-        "@types/node": "^10.17.6",
-        "@types/vscode": "^1.40.0",
-        "@types/webpack": "^4.41.0",
+        "@types/node": "^12.12.30",
+        "@types/vscode": "^1.43.0",
+        "@types/webpack": "^4.41.7",
         "ts-loader": "^6.2.1",
-        "ts-node": "^8.5.4",
-        "typescript": "^3.7.3",
-        "vsce": "^1.70.0",
-        "webpack": "^4.41.2",
-        "webpack-cli": "^3.3.10"
+        "ts-node": "^8.6.2",
+        "typescript": "^3.8.3",
+        "vsce": "^1.74.0",
+        "webpack": "^4.42.0",
+        "webpack-cli": "^3.3.11"
     },
     "dependencies": {
-        "vscode-languageclient": "^5.2.1"
+        "vscode-languageclient": "^6.1.1"
     }
 }
