@@ -1,5 +1,7 @@
 # D support for Visual Studio Code
 
+## This project is unmaintained, please use another one such as [serve-d](https://github.com/pure-d/code-d)
+
 [![Visual Studio Marketplace](https://img.shields.io/vscode-marketplace/v/LaurentTreguier.vscode-dls.svg?style=flat-square)](https://marketplace.visualstudio.com/items?itemName=LaurentTreguier.vscode-dls)
 
 A Visual Studio Code extension for [Dlang](https://dlang.org).
